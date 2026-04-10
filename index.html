@@ -84,21 +84,20 @@
 <script>
 var user = null, isAdmin = false, phase = "groups", gTab = 0, adminTab = 0, adminResTab = 0, adminViewUser = null, isRO = false, pendingDel = null, cRAF = null;
 var WC_LOGO = ""; 
-
-// SOLUCIÓN: Se agregó la variable RN que faltaba y causaba el error "Datos corruptos"
-var RN = {
-  groups: "Fase de Grupos",
-  r32: "Octavos de Final",
-  r16: "Cuartos de Final",
-  qf: "Semifinal",
-  sf: "Final y Tercer Puesto",
-  summary: "Mi Quiniela"
-};
+var RN = { groups: "Fase de Grupos", r32: "Octavos de Final", r16: "Cuartos de Final", qf: "Semifinal", sf: "Final y Tercer Puesto", summary: "Mi Quiniela" };
 
 function sG(k, fb) { try { var r = localStorage.getItem(k); if (r === null) return fb; var p = JSON.parse(r); return (p === null || p === undefined) ? fb : p; } catch (e) { return fb; } }
 function sS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
 function toast(msg, cls) { var d = document.createElement("div"); d.className = "toast " + (cls || "tI"); d.textContent = msg; document.getElementById("toasts").appendChild(d); setTimeout(function () { if (d.parentNode) d.remove(); }, 3200); }
+
+// SOLUCIÓN: Función de validación de correo amigable y 100% compatible
+function validMail(e) { 
+    if(!e) return false; 
+    var at = e.indexOf('@'); 
+    var dot = e.lastIndexOf('.'); 
+    return at > 0 && dot > at + 1; 
+}
 
 var DEF_CONFIG = [
   { n: "A", t: [{n:"Estados Unidos",a:"USA",i:""},{n:"Francia",a:"FRA",i:""},{n:"Senegal",a:"SEN",i:""},{n:"Nueva Zelanda",a:"NZL",i:""}] },
@@ -151,7 +150,16 @@ function gA() { var a = sG("wc26_admins", null); if (!a || typeof a !== "object"
 function sAA(a) { sS("wc26_admins", a); }
 function gAN(e) { var a = gA(); return (a && a[e] && a[e].n) ? a[e].n : e.split("@")[0]; }
 
-function dR(e,p,n,a,cp) { if(!e||!p||!n||!a) return toast("Completa todos","tE"); if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return toast("Correo invalido","tE"); if(p.length<6) return toast("Min 6 caracteres","tE"); if(p!==cp) return toast("Contrasenas no coinciden","tE"); var u=gU(); if(u[e]) return toast("Ya registrado","tE"); u[e]={p:btoa(p),n:n,a:a}; sUU(u); user=e; sessionStorage.setItem("wc26_s",e); toast("Cuenta creada","tS"); render(); }
+// SOLUCIÓN: Se aplicó la función validMail aquí
+function dR(e,p,n,a,cp) { 
+    if(!e||!p||!n||!a) return toast("Completa todos","tE"); 
+    if(!validMail(e)) return toast("Correo invalido","tE"); 
+    if(p.length<6) return toast("Min 6 caracteres","tE"); 
+    if(p!==cp) return toast("Contrasenas no coinciden","tE"); 
+    var u=gU(); if(u[e]) return toast("Ya registrado","tE"); 
+    u[e]={p:btoa(p),n:n,a:a}; sUU(u); user=e; sessionStorage.setItem("wc26_s",e); toast("Cuenta creada","tS"); render(); 
+}
+
 function dL(e,p) { if(!e||!p) return toast("Completa campos","tE"); var u=gU(); if(!u[e]||u[e].p!==btoa(p)) return toast("Datos incorrectos","tE"); user=e; sessionStorage.setItem("wc26_s",e); toast("Bienvenido","tS"); render(); }
 function dA(e,p) { var a=gA(); if(!a[e]||a[e].p!==btoa(p)) return toast("Credenciales incorrectas","tE"); isAdmin=true; user=e; sessionStorage.setItem("wc26_a",e); toast("Admin iniciado","tS"); render(); }
 function dO() { user=null; sessionStorage.removeItem("wc26_s"); render(); }
@@ -453,13 +461,14 @@ function renderAdmAdmins() {
   return h;
 }
 
+// SOLUCIÓN: Se aplicó la función validMail aquí también
 function addAdminAcc() {
   var e = document.getElementById("naE").value.trim();
   var n = document.getElementById("naN").value.trim();
   var a = document.getElementById("naA").value.trim();
   var p = document.getElementById("naP").value;
   if(!e || !p || !n) return toast("Correo, nombre y contraseña son obligatorios", "tE");
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return toast("Correo inválido", "tE");
+  if(!validMail(e)) return toast("Correo inválido", "tE");
   if(p.length < 6) return toast("La contraseña debe tener al menos 6 caracteres", "tE");
   var admins = gA();
   if(admins[e]) return toast("Este correo ya tiene cuenta de administrador", "tE");
@@ -480,9 +489,7 @@ function delAdminAcc(e) {
 function renderAdminView() {
   var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+getTOTAL()+'</div></div></div>';
   if(hR()){var sc=calcScore(pd,eR()),rk2=getRanking()[adminViewUser]; h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px"><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">POSICION</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">#'+(rk2||"--")+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">PUNTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">'+sc.total+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">ACIERTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--txt)">'+(sc.g+sc.r32+sc.r16+sc.qf+sc.sf+sc.f+sc.t)+'</div></div></div>';}
-  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3>';
-  // SOLUCIÓN: Se corrigió un paréntesis de cierre que faltaba aquí
-  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
+  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
   ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+eR().ko[ph].length+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px;margin-right:3px"></i>'+esc(getAllTeams().find(x=>x.n===pd[ph][k])?.a||"?")+'</div>'; h+='</div>';});
   if(pd.f){var tf=getAllTeams().find(x=>x.n===pd.f); h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;margin-top:4px">'+tHtml(tf)+'</div></div>';}
   return h+'</div>';
