@@ -85,6 +85,16 @@
 var user = null, isAdmin = false, phase = "groups", gTab = 0, adminTab = 0, adminResTab = 0, adminViewUser = null, isRO = false, pendingDel = null, cRAF = null;
 var WC_LOGO = ""; 
 
+// SOLUCIÓN: Se agregó la variable RN que faltaba y causaba el error "Datos corruptos"
+var RN = {
+  groups: "Fase de Grupos",
+  r32: "Octavos de Final",
+  r16: "Cuartos de Final",
+  qf: "Semifinal",
+  sf: "Final y Tercer Puesto",
+  summary: "Mi Quiniela"
+};
+
 function sG(k, fb) { try { var r = localStorage.getItem(k); if (r === null) return fb; var p = JSON.parse(r); return (p === null || p === undefined) ? fb : p; } catch (e) { return fb; } }
 function sS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
@@ -295,19 +305,15 @@ function bindUser() {
 
 /* ========== ADMIN ========== */
 function renderAdmin() {
-  // SE AGREGÓ "Admins" AL MENÚ
   var tabs=["Config. Grupos","Usuarios","Fechas Limite","Cargar Resultados","Puntuacion","Admins"],h='<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><i class="fa-solid fa-trophy" style="font-size:24px;color:var(--acc);filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"></i><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--dng)"><i class="fa-solid fa-shield-halved" style="margin-right:3px"></i>Admin</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">';
   for(var i=0;i<tabs.length;i++) h+='<button class="ni'+(adminTab===i?" act":"")+'" onclick="adminTab='+i+';adminResTab=0;render()"><i class="fa-solid '+["fa-futbol","fa-users","fa-calendar-check","fa-pen-to-square","fa-ranking-star","fa-user-shield"][i]+' nI"></i>'+esc(tabs[i])+'</button>';
   h+='</nav><div style="padding:12px 14px;border-top:1px solid var(--brd)"><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">'+esc(gAN(user))+'</div><div style="font-size:10px;color:var(--mut);margin-bottom:8px">'+esc(user)+'</div><button class="ni" onclick="dAO()" style="padding:7px 12px;font-size:12px;color:var(--dng)"><i class="fa-solid fa-right-from-bracket nI"></i> Salir</button></div></aside><div id="ov" class="ov" onclick="tSB()"></div><div class="mc"><div class="tB"><div class="font-display" style="font-weight:700;font-size:14px;color:var(--acc)">'+esc(tabs[adminTab])+'</div></div><div style="padding:24px">';
-  
-  // SE AGREGÓ LA CONDICIÓN PARA LA NUEVA PESTAÑA
   if(adminTab===0) h+=renderAdmConfig(); 
   else if(adminTab===1) h+=renderAdmUsers(); 
   else if(adminTab===2) h+=renderAdmLocks(); 
   else if(adminTab===3) h+=renderAdmResults(); 
   else if(adminTab===4) h+=renderAdmScoring();
   else if(adminTab===5) h+=renderAdmAdmins();
-  
   return h+'</div></div></div>';
 }
 
@@ -414,13 +420,10 @@ function renderAdmScoring() {
   return h+'</div>';
 }
 
-/* NUEVA FUNCIÓN: MANEJO DE NUEVOS ADMINS */
 function renderAdmAdmins() {
   var admins = gA();
   var keys = Object.keys(admins);
   var h = '<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Administrar Cuentas Admin</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:20px">Agrega nuevos administradores con acceso completo al panel.</p>';
-
-  // Formulario de creación
   h += '<div class="kmC" style="margin-bottom:24px">';
   h += '<div class="kM"><i class="fa-solid fa-user-plus" style="margin-right:4px"></i> Nuevo Administrador</div>';
   h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
@@ -431,26 +434,21 @@ function renderAdmAdmins() {
   h += '</div>';
   h += '<button class="bP" style="width:100%;margin-top:10px" onclick="addAdminAcc()"><i class="fa-solid fa-plus" style="margin-right:6px"></i>Registrar Admin</button>';
   h += '</div>';
-
-  // Lista de admins actuales
   h += '<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Admins Actuales ('+keys.length+')</h3>';
   h += '<div style="display:grid;gap:8px">';
-  
   keys.forEach(k => {
     var adm = admins[k];
-    var isMe = (k === user); // Evitar que el admin se elimine a sí mismo y se quede fuera
+    var isMe = (k === user);
     h += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd)">';
     h += '<div style="display:flex;align-items:center;gap:12px">';
     h += '<div style="width:36px;height:36px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;color:var(--acc)"><i class="fa-solid fa-user-shield"></i></div>';
     h += '<div><div style="font-weight:600;font-size:14px">'+esc(adm.n)+' '+(esc(adm.a)||'')+(isMe?' <span style="font-size:10px;color:var(--acc);font-weight:700">(Tú)</span>':'')+'</div><div style="font-size:11px;color:var(--mut)">'+esc(k)+'</div></div>';
     h += '</div>';
-    
     if(!isMe) {
       h += '<button class="bS dng" onclick="delAdminAcc(\''+esc(k).replace(/'/g,"\\'")+'\')"><i class="fa-solid fa-trash-can" style="margin-right:4px"></i>Eliminar</button>';
     }
     h += '</div>';
   });
-  
   h += '</div>';
   return h;
 }
@@ -460,14 +458,11 @@ function addAdminAcc() {
   var n = document.getElementById("naN").value.trim();
   var a = document.getElementById("naA").value.trim();
   var p = document.getElementById("naP").value;
-
   if(!e || !p || !n) return toast("Correo, nombre y contraseña son obligatorios", "tE");
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return toast("Correo inválido", "tE");
   if(p.length < 6) return toast("La contraseña debe tener al menos 6 caracteres", "tE");
-
   var admins = gA();
   if(admins[e]) return toast("Este correo ya tiene cuenta de administrador", "tE");
-
   admins[e] = { p: btoa(p), n: n, a: a };
   sAA(admins);
   toast("Admin agregado exitosamente", "tS");
@@ -485,7 +480,9 @@ function delAdminAcc(e) {
 function renderAdminView() {
   var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+getTOTAL()+'</div></div></div>';
   if(hR()){var sc=calcScore(pd,eR()),rk2=getRanking()[adminViewUser]; h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px"><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">POSICION</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">#'+(rk2||"--")+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">PUNTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">'+sc.total+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">ACIERTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--txt)">'+(sc.g+sc.r32+sc.r16+sc.qf+sc.sf+sc.f+sc.t)+'</div></div></div>';}
-  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr);gap:10px">';
+  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3>';
+  // SOLUCIÓN: Se corrigió un paréntesis de cierre que faltaba aquí
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
   ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+eR().ko[ph].length+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px;margin-right:3px"></i>'+esc(getAllTeams().find(x=>x.n===pd[ph][k])?.a||"?")+'</div>'; h+='</div>';});
   if(pd.f){var tf=getAllTeams().find(x=>x.n===pd.f); h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;margin-top:4px">'+tHtml(tf)+'</div></div>';}
   return h+'</div>';
