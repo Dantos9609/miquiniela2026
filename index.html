@@ -10,16 +10,14 @@
 <script>tailwind.config={theme:{extend:{fontFamily:{display:['Outfit','sans-serif'],body:['Space Grotesk','sans-serif']}}}}</script>
 <style>
 :root{--bg:#040a04;--bg2:#081208;--card:#0f1f0f;--brd:#1a3a1a;--brd2:#2a5a2a;--acc:#22c55e;--acc2:#4ade80;--aG:rgba(34,197,94,.12);--grn:#86efac;--txt:#f0fdf4;--txt2:#bbf7d0;--mut:#6b8a6b;--dng:#ef4444}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--brd2);border-radius:3px}
 .hs{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(ellipse at 50% 100%,#0a2a0a 0%,#050a05 60%,#020502 100%);border-top:4px solid rgba(34,197,94,0.2);border-bottom:4px solid rgba(34,197,94,0.2)}
 .ho{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(34,197,94,0.03) 40px),repeating-linear-gradient(90deg,transparent,transparent 39px,rgba(34,197,94,0.03) 40px);z-index:1}
 .hc{position:relative;z-index:2;text-align:center;max-width:580px;padding:20px}
 .ab{background:rgba(15,31,15,0.95);backdrop-filter:blur(24px);border:1px solid var(--brd2);border-radius:16px;padding:32px;max-width:420px;margin:0 auto;box-shadow:0 0 40px rgba(34,197,94,0.1)}
 .fi,.dti{width:100%;padding:10px 14px;background:var(--bg);border:1px solid var(--brd);border-radius:9px;color:var(--txt);font-family:inherit;font-size:13px;outline:none;transition:.2s}
-.fi:focus,.dti:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--aG)}
-.dti{color-scheme:dark}
+.fi:focus,.dti:focus{border-color:var(--acc);box-shadow:0 0 0 3px var(--aG)}.dti{color-scheme:dark}
 .bP{width:100%;padding:12px;background:var(--acc);color:#052e16;font-family:'Outfit';font-weight:700;font-size:15px;border:none;border-radius:9px;cursor:pointer;transition:.2s;text-shadow:0 1px 0 rgba(255,255,255,0.2)}
 .bP:hover{background:var(--acc2);transform:translateY(-1px);box-shadow:0 4px 12px rgba(34,197,94,0.3)}
 .bG{background:none;border:none;color:var(--acc);cursor:pointer;font-family:inherit;font-size:13px;padding:4px 0;transition:.2s}.bG:hover{color:var(--acc2)}
@@ -50,7 +48,7 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .sTa{padding:7px 18px;border-radius:7px;border:none;background:transparent;color:var(--txt2);font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;transition:.15s}.sTa:hover{color:var(--txt)}.sTa.on{background:var(--card);color:var(--acc);box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .km{background:var(--card);border:1px solid var(--brd);border-radius:11px;padding:16px;transition:.2s}.km:hover{border-color:var(--brd2)}
 .kM{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.tBdg{display:inline-flex;align-items:center;justify-content:center;width:28px;height:22px;border-radius:4px;font-size:8.5px;font-weight:800;color:#fff;flex-shrink:0;font-family:'Outfit';letter-spacing:.3px}
+.tBdg{display:inline-flex;align-items:center;justify-content:center;width:32px;height:20px;border-radius:4px;font-size:8.5px;font-weight:800;color:#fff;flex-shrink:0;font-family:'Outfit';letter-spacing:.3px}
 .lkX{text-align:center;padding:60px 20px}
 .lBan{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:#fca5a5}
 .tBan{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:10px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;gap:10px;font-size:12px;color:var(--acc2)}
@@ -74,8 +72,9 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .sOk{background:rgba(34,197,94,.12);color:#86efac}
 .frmR{margin-bottom:10px}.frmR label{display:block;font-size:11px;font-weight:600;margin-bottom:5px;color:var(--txt2)}
 .dis-match{opacity: 0.5; pointer-events: none;}
+.team-crest{width:26px;height:26px;object-fit:contain;border-radius:3px;flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))}
 *:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}}
+@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}.team-crest{width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -84,34 +83,46 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 <div id="toasts" class="toastC"></div>
 <script>
 var user = null, isAdmin = false, phase = "groups", gTab = 0, adminTab = 0, adminResTab = 0, adminViewUser = null, isRO = false, pendingDel = null, cRAF = null;
+var WC_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/2026_FIFA_World_Cup.svg/200px-2026_FIFA_World_Cup.svg.png";
 
 function sG(k, fb) { try { var r = localStorage.getItem(k); if (r === null) return fb; var p = JSON.parse(r); return (p === null || p === undefined) ? fb : p; } catch (e) { return fb; } }
 function sS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
 function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
 function toast(msg, cls) { var d = document.createElement("div"); d.className = "toast " + (cls || "tI"); d.textContent = msg; document.getElementById("toasts").appendChild(d); setTimeout(function () { if (d.parentNode) d.remove(); }, 3200); }
 
-var GR = [
-  { n: "A", t: ["Estados Unidos","Francia","Senegal","Nueva Zelanda"] }, { n: "B", t: ["Mexico","Alemania","Nigeria","Peru"] },
-  { n: "C", t: ["Canada","Espana","Camerun","Siria"] }, { n: "D", t: ["Argentina","Croacia","Egipto","Costa Rica"] },
-  { n: "E", t: ["Brasil","Inglaterra","Marruecos","Japon"] }, { n: "F", t: ["Uruguay","Portugal","Ghana","Corea del Sur"] },
-  { n: "G", t: ["Colombia","Paises Bajos","Argelia","Iran"] }, { n: "H", t: ["Ecuador","Belgica","Tunez","Arabia Saudita"] },
-  { n: "I", t: ["Chile","Italia","Costa de Marfil","Australia"] }, { n: "J", t: ["Qatar","Suiza","Polonia","Jamaica"] },
-  { n: "K", t: ["Emiratos Arabes","Dinamarca","Serbia","Panama"] }, { n: "L", t: ["Irak","Austria","Turquia","Noruega"] }
+/* CONFIGURACIÓN DINÁMICA DE EQUIPOS */
+var DEF_CONFIG = [
+  { n: "A", t: [{n:"Estados Unidos",a:"USA",i:""},{n:"Francia",a:"FRA",i:""},{n:"Senegal",a:"SEN",i:""},{n:"Nueva Zelanda",a:"NZL",i:""}] },
+  { n: "B", t: [{n:"Mexico",a:"MEX",i:""},{n:"Alemania",a:"GER",i:""},{n:"Nigeria",a:"NGA",i:""},{n:"Peru",a:"PER",i:""}] },
+  { n: "C", t: [{n:"Canada",a:"CAN",i:""},{n:"Espana",a:"ESP",i:""},{n:"Camerun",a:"CMR",i:""},{n:"Siria",a:"SYR",i:""}] },
+  { n: "D", t: [{n:"Argentina",a:"ARG",i:""},{n:"Croacia",a:"CRO",i:""},{n:"Egipto",a:"EGY",i:""},{n:"Costa Rica",a:"CRC",i:""}] },
+  { n: "E", t: [{n:"Brasil",a:"BRA",i:""},{n:"Inglaterra",a:"ENG",i:""},{n:"Marruecos",a:"MAR",i:""},{n:"Japon",a:"JPN",i:""}] },
+  { n: "F", t: [{n:"Uruguay",a:"URU",i:""},{n:"Portugal",a:"POR",i:""},{n:"Ghana",a:"GHA",i:""},{n:"Corea del Sur",a:"KOR",i:""}] },
+  { n: "G", t: [{n:"Colombia",a:"COL",i:""},{n:"Paises Bajos",a:"NED",i:""},{n:"Argelia",a:"ALG",i:""},{n:"Iran",a:"IRN",i:""}] },
+  { n: "H", t: [{n:"Ecuador",a:"ECU",i:""},{n:"Belgica",a:"BEL",i:""},{n:"Tunez",a:"TUN",i:""},{n:"Arabia Saudita",a:"KSA",i:""}] },
+  { n: "I", t: [{n:"Chile",a:"CHI",i:""},{n:"Italia",a:"ITA",i:""},{n:"Costa de Marfil",a:"CIV",i:""},{n:"Australia",a:"AUS",i:""}] },
+  { n: "J", t: [{n:"Qatar",a:"QAT",i:""},{n:"Suiza",a:"SUI",i:""},{n:"Polonia",a:"POL",i:""},{n:"Jamaica",a:"JAM",i:""}] },
+  { n: "K", t: [{n:"Emiratos Arabes",a:"UAE",i:""},{n:"Dinamarca",a:"DEN",i:""},{n:"Serbia",a:"SRB",i:""},{n:"Panama",a:"PAN",i:""}] },
+  { n: "L", t: [{n:"Irak",a:"IRQ",i:""},{n:"Austria",a:"AUT",i:""},{n:"Turquia",a:"TUR",i:""},{n:"Noruega",a:"NOR",i:""}] }
 ];
 var MSI = [[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]];
+var TC = {}; (function () { var c = ["#1a4b8c","#1a3a7a","#1a8a52","#2a2a40","#0a7a3e","#2a2a2a","#0a8a55","#cc2030","#cc2020","#b81020","#1a7a40","#b81020","#5a9ad0","#cc2030","#b81828","#1a3a7a","#2a8a30","#8a2030","#b82028","#2a2a80","#5ab0d8","#1a6a2a","#b81828","#b82838","#d4a020","#e87820","#1a6a38","#2a9a48","#d4b020","#c82838","#c81818","#1a7a38","#c82828","#1a8a48","#d88020","#c8a820","#8a1a38","#cc2020","#b81838","#1a9a3a","#1a7a38","#b81828","#b83038","#1a3878","#b81828","#b82838","#a81828"]; var keys = []; DEF_CONFIG.forEach(g=>g.t.forEach(t=>keys.push(t.n))); for (var i = 0; i < keys.length; i++) TC[keys[i]] = c[i % c.length]; })();
 
-/* BANDERAS NATIVAS (EMOJIS) */
-var FL = {"Estados Unidos":"🇺🇸","Francia":"🇫🇷","Senegal":"🇸🇳","Nueva Zelanda":"🇳🇿","Mexico":"🇲🇽","Alemania":"🇩🇪","Nigeria":"🇳🇬","Peru":"🇵🇪","Canada":"🇨🇦","Espana":"🇪🇸","Camerun":"🇨🇲","Siria":"🇸🇾","Argentina":"🇦🇷","Croacia":"🇭🇷","Egipto":"🇪🇬","Costa Rica":"🇨🇷","Brasil":"🇧🇷","Inglaterra":"🇬🇧","Marruecos":"🇲🇦","Japon":"🇯🇵","Uruguay":"🇺🇾","Portugal":"🇵🇹","Ghana":"🇬🇭","Corea del Sur":"🇰🇷","Colombia":"🇨🇴","Paises Bajos":"🇳🇱","Argelia":"🇩🇿","Iran":"🇮🇷","Ecuador":"🇪🇨","Belgica":"🇧🇪","Tunez":"🇹🇳","Arabia Saudita":"🇸🇦","Chile":"🇨🇱","Italia":"🇮🇹","Costa de Marfil":"🇨🇮","Australia":"🇦🇺","Qatar":"🇶🇦","Suiza":"🇨🇭","Polonia":"🇵🇱","Jamaica":"🇯🇲","Emiratos Arabes":"🇦🇪","Dinamarca":"🇩🇰","Serbia":"🇷🇸","Panama":"🇵🇦","Irak":"🇮🇶","Austria":"🇦🇹","Turquia":"🇹🇷","Noruega":"🇳🇴"};
+function getCfg() { return sG("wc26_cfg", DEF_CONFIG); }
+function setCfg(c) { sS("wc26_cfg", c); }
+function getAllTeams() { var c = getCfg(), arr = []; c.forEach(g => g.t.forEach(t => arr.push(t))); return arr; }
 
-var AB = {"Estados Unidos":"USA","Francia":"FRA","Senegal":"SEN","Nueva Zelanda":"NZL","Mexico":"MEX","Alemania":"GER","Nigeria":"NGA","Peru":"PER","Canada":"CAN","Espana":"ESP","Camerun":"CMR","Siria":"SYR","Argentina":"ARG","Croacia":"CRO","Egipto":"EGY","Costa Rica":"CRC","Brasil":"BRA","Inglaterra":"ENG","Marruecos":"MAR","Japon":"JPN","Uruguay":"URU","Portugal":"POR","Ghana":"GHA","Corea del Sur":"KOR","Colombia":"COL","Paises Bajos":"NED","Argelia":"ALG","Iran":"IRN","Ecuador":"ECU","Belgica":"BEL","Tunez":"TUN","Arabia Saudita":"KSA","Chile":"CHI","Italia":"ITA","Costa de Marfil":"CIV","Australia":"AUS","Qatar":"QAT","Suiza":"SUI","Polonia":"POL","Jamaica":"JAM","Emiratos Arabes":"UAE","Dinamarca":"DEN","Serbia":"SRB","Panama":"PAN","Irak":"IRQ","Austria":"AUT","Turquia":"TUR","Noruega":"NOR"};
-var TC = {}; (function () { var c = ["#1a4b8c","#1a3a7a","#1a8a52","#2a2a40","#0a7a3e","#2a2a2a","#0a8a55","#cc2030","#cc2020","#b81020","#1a7a40","#b81020","#5a9ad0","#cc2030","#b81828","#1a3a7a","#2a8a30","#8a2030","#b82028","#2a2a80","#5ab0d8","#1a6a2a","#b81828","#b82838","#d4a020","#e87820","#1a6a38","#2a9a48","#d4b020","#c82838","#c81818","#1a7a38","#c82828","#1a8a48","#d88020","#c8a820","#8a1a38","#cc2020","#b81838","#1a9a3a","#1a7a38","#b81828","#b83038","#1a3878","#b81828","#b82838","#a81828"]; var keys = Object.keys(AB); for (var i = 0; i < keys.length; i++) TC[keys[i]] = c[i % c.length]; })();
-var ALL_TEAMS = Object.keys(AB);
-var KO_CONFIG = { r32: 16, r16: 8, qf: 4, sf: 2 };
-var RN = { groups: "Fase de Grupos", r32: "Octavos de Final", r16: "Cuartos de Final", qf: "Semifinal", sf: "Final", summary: "Mi Quiniela" };
-var TOTAL = 72 + 16 + 8 + 4 + 2 + 2;
-var WC_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/2026_FIFA_World_Cup.svg/200px-2026_FIFA_World_Cup.svg.png";
+/* HELPERS DE VISUALIZACIÓN */
+function tHtml(t, size) {
+  size = size || '14px';
+  if(t.i) {
+    return '<img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+(size==='14px'?'26':'22')+'px;height:'+(size==='14px'?'26':'22')+'px" onerror="this.outerHTML=\'<span class=\\"tBdg\\" style=\\"background:var(--brd2)\\">'+esc(t.a)+'</span>\'"> <span style="font-size:'+size+';font-weight:500">'+esc(t.a)+'</span>';
+  } else {
+    return '<span style="font-size:'+size+';font-weight:500">'+esc(t.n)+' <span class="tBdg" style="background:var(--brd2)">'+esc(t.a)+'</span></span>';
+  }
+}
 
-function emptyRes() { return { g: {}, ko: { r32: Array(16).fill(null).map(()=>({h:null,a:null,w:null})), r16: Array(8).fill(null).map(()=>({h:null,a:null,w:null})), qf: Array(4).fill(null).map(()=>({h:null,a:null,w:null})), sf: Array(2).fill(null).map(()=>({h:null,a:null,w:null})) }, f: null, t: null }; }
+function emptyRes() { var c=getCfg(); var r={g:{},ko:{r32:Array(c.length*4/3).fill(null).map(()=>({h:null,a:null,w:null})),r16:Array(c.length/3).fill(null).map(()=>({h:null,a:null,w:null})),qf:Array(c.length/6).fill(null).map(()=>({h:null,a:null,w:null})),sf:Array(2).fill(null).map(()=>({h:null,a:null,w:null}))},f:null,t:null}; return r; }
 function eR() { var r = sG("wc26_results", null); if (!r) { r = emptyRes(); sS("wc26_results", r); } return r; }
 function sR(r) { sS("wc26_results", r); }
 function hR() { var r = eR(); if (Object.keys(r.g).length > 0) return true; for (var p of ["r32","r16","qf","sf"]) for (var i = 0; i < r.ko[p].length; i++) if (r.ko[p][i].w) return true; return !!r.f || !!r.t; }
@@ -136,13 +147,14 @@ function eP() { return sG("wc26_p_" + user, emptyPred()); }
 function sP(p) { sS("wc26_p_" + user, p); }
 function gUP(e) { return sG("wc26_p_" + e, emptyPred()); }
 function gPr(p) { var d=Object.keys(p.g).length; d+=Object.keys(p.r32).length; d+=Object.keys(p.r16).length; d+=Object.keys(p.qf).length; d+=Object.keys(p.sf).length; if(p.f)d++; if(p.t)d++; return d; }
+function getTOTAL() { var c=getCfg(); return (c.length*6) + (c.length*4/3) + (c.length/3) + (c.length/6) + 2 + 2; }
 
 var DEF_L = { groups: "2026-06-10T23:59:59", r32: "2026-06-17T23:59:59", r16: "2026-06-22T23:59:59", qf: "2026-06-28T23:59:59", sf: "2026-07-05T23:59:59" };
 function gL() { return sG("wc26_locks", DEF_L); } function sL(l) { sS("wc26_locks", l); }
 function iL(ph) { var l=gL(); if(!l[ph])return false; return Date.now()>new Date(l[ph]).getTime(); }
-function tL(ph) { var l=gL(); if(!l[ph])return ""; var d=new Date(l[ph]).getTime()-Date.now(); if(d<=0)return"Bloqueada"; var dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000),mm=Math.floor((d%3600000)/60000); return dd>0?"Cierra en "+dd+"d "+hh+"h":"Cierra en "+hh+"h "+mm+"m"; }
+function tL(ph) { var l=gL(); if(!l[ph])return ""; var d=new Date(l[ph]).getTime()-Date.now(); if(d<=0)return"Bloqueada"; var dd=Math.floor(d/86400000),hh=Math.floor((d%86400000)/3600000); return dd>0?"Cierra en "+dd+"d "+hh+"h":"Cierra en "+hh+"h"; }
 
-function calcStandings(gi, pd) { var t=GR[gi].t.map(n=>({name:n,pts:0,gd:0,gf:0,ga:0})); MSI.forEach((m,mi)=>{ var k=gi+"_"+mi,r=pd.g[k],gh=0,ga=0; if(r==="1"){gh=2;ga=0;t[m[0]].pts+=3;}else if(r==="X"){gh=1;ga=1;t[m[0]].pts+=1;t[m[1]].pts+=1;}else if(r==="2"){gh=0;ga=2;t[m[1]].pts+=3;} t[m[0]].gf+=gh;t[m[0]].ga+=ga;t[m[0]].gd+=gh-ga; t[m[1]].gf+=ga;t[m[1]].ga+=gh;t[m[1]].gd+=ga-gh; }); t.sort((a,b)=>{ if(b.pts!==a.pts)return b.pts-a.pts; if(b.gd!==a.gd)return b.gd-a.gd; if(b.gf!==a.gf)return b.gf-a.gf; return a.name.localeCompare(b.name); }); return t; }
+function calcStandings(gi, pd) { var cfg=getCfg(), t=cfg[gi].t.map(tm=>({name:tm.n,pts:0,gd:0,gf:0,ga:0})); MSI.forEach((m,mi)=>{ var k=gi+"_"+mi,r=pd.g[k],gh=0,ga=0; if(r==="1"){gh=2;ga=0;t[m[0]].pts+=3;}else if(r==="X"){gh=1;ga=1;t[m[0]].pts+=1;t[m[1]].pts+=1;}else if(r==="2"){gh=0;ga=2;t[m[1]].pts+=3;} t[m[0]].gf+=gh;t[m[0]].ga+=ga;t[m[0]].gd+=gh-ga; t[m[1]].gf+=ga;t[m[1]].ga+=gh;t[m[1]].gd+=ga-gh; }); t.sort((a,b)=>{ if(b.pts!==a.pts)return b.pts-a.pts; if(b.gd!==a.gd)return b.gd-a.gd; if(b.gf!==a.gf)return b.gf-a.gf; return a.name.localeCompare(b.name); }); return t; }
 
 var SP_MAP = { g:1, r32:2, r16:3, qf:5, sf:8, f:12, t:5 };
 function calcScore(pd, re) { var s={g:0,r32:0,r16:0,qf:0,sf:0,f:0,t:0,total:0}; for(var k in re.g) if(pd.g[k]===re.g[k]) s.g++; for(var p of ["r32","r16","qf","sf"]) for(var i=0;i<re.ko[p].length;i++) { var m=re.ko[p][i]; if(m&&m.w && pd[p] && pd[p][i]===m.w) s[p]++; } if(re.f && pd.f===re.f) s.f++; if(re.t && pd.t===re.t) s.t++; s.total = s.g*SP_MAP.g + s.r32*SP_MAP.r32 + s.r16*SP_MAP.r16 + s.qf*SP_MAP.qf + s.sf*SP_MAP.sf + s.f*SP_MAP.f + s.t*SP_MAP.t; return s; }
@@ -151,14 +163,13 @@ function getRanking() { var u=gU(),keys=Object.keys(u); if(!hR()) return {}; var
 function setGroupPred(gi,mi,val) { if(iL("groups")) return toast("Fase bloqueada","tE"); var pd=eP(); pd.g[gi+"_"+mi]=val; sP(pd); render(); }
 function setKOPred(ph,idx,val) { if(iL(ph)) return toast("Fase bloqueada","tE"); var pd=eP(); if(!pd[ph]) pd[ph]={}; pd[ph][idx]=val; sP(pd); render(); }
 function setFinalPred(key,val) { if(iL("sf")) return toast("Fase bloqueada","tE"); var pd=eP(); pd[key]=val; sP(pd); render(); }
-
 function setResGroup(gi,mi,val) { var r=eR(); r.g[gi+"_"+mi]=val; sR(r); render(); }
 function setResKO(ph,idx,side,val) { var r=eR(); r.ko[ph][idx][side]=val; if(r.ko[ph][idx].w && r.ko[ph][idx].w!==r.ko[ph][idx].h && r.ko[ph][idx].w!==r.ko[ph][idx].a) r.ko[ph][idx].w=null; sR(r); render(); }
 function setResKOWinner(ph,idx,team) { var r=eR(); r.ko[ph][idx].w=team; sR(r); render(); }
 function setResFinal(key,val) { var r=eR(); r[key]=val; sR(r); render(); }
-function clearResPhase(ph) { var r=eR(); if(ph==="g") r.g={}; else if(ph==="f") { r.f=null; r.t=null; } else r.ko[ph]=Array(KO_CONFIG[ph]).fill(null).map(()=>({h:null,a:null,w:null})); sR(r); toast("Fase limpiada","tS"); render(); }
+function clearResPhase(ph) { var r=eR(); if(ph==="g") r.g={}; else if(ph==="f") { r.f=null; r.t=null; } else r.ko[ph]=r.ko[ph].map(()=>({h:null,a:null,w:null})); sR(r); toast("Fase limpiada","tS"); render(); }
 
-function teamOpts(sel) { var h='<option value="">-- Seleccionar --</option>'; ALL_TEAMS.forEach(t=>{h+='<option value="'+esc(t)+'"'+(sel===t?' selected':'')+'>'+esc(FL[t]||"")+' '+esc(AB[t])+'</option>';}); return h; }
+function teamOpts(sel) { var h='<option value="">-- Seleccionar --</option>'; getAllTeams().forEach(t=>{h+='<option value="'+esc(t.n)+'"'+(sel===t.n?' selected':'')+'>'+esc(t.a)+' - '+esc(t.n)+'</option>';}); return h; }
 
 function initCanvas() { var cv=document.getElementById("hCanvas"); if(!cv) return; var ctx=cv.getContext("2d"),w,h,pts=[]; function rs(){w=cv.width=cv.parentElement.offsetWidth;h=cv.height=cv.parentElement.offsetHeight;} rs(); window.addEventListener("resize",rs); for(var i=0;i<50;i++) pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+0.5,dx:(Math.random()-0.5)*0.35,dy:(Math.random()-0.5)*0.25,a:Math.random()*0.3+0.1}); function dr(){ctx.clearRect(0,0,w,h); for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(34,197,94,"+p.a+")";ctx.fill();} for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,dist=Math.sqrt(dx*dx+dy*dy); if(dist<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle="rgba(34,197,94,"+(0.04*(1-dist/110))+")";ctx.stroke();}} cRAF=requestAnimationFrame(dr);} dr(); }
 function stopCanvas() { if(cRAF){cancelAnimationFrame(cRAF);cRAF=null;} }
@@ -166,35 +177,34 @@ function tSB() { var s=document.getElementById("sb"),o=document.getElementById("
 function setPhase(p) { phase=p; gTab=0; render(); }
 
 function render() {
-  stopCanvas();
-  var app = document.getElementById("app");
-  if (!app) return;
+  stopCanvas(); var app = document.getElementById("app"); if (!app) return;
   try {
     if (!user && !isAdmin) { app.innerHTML = renderAuth(); setTimeout(initCanvas, 60); return; }
     if (isAdmin && !adminViewUser) { app.innerHTML = renderAdmin(); bindAdmin(); return; }
     if (isAdmin && adminViewUser) { app.innerHTML = renderAdminView(); bindAdmin(); return; }
     app.innerHTML = renderUser(); bindUser();
   } catch(err) {
-    console.error("Error al cargar la vista:", err);
-    app.innerHTML = '<div style="padding:60px 20px;text-align:center;color:var(--dng)"><i class="fa-solid fa-triangle-exclamation" style="font-size:48px;margin-bottom:20px;display:block"></i><h2 class="font-display" style="font-weight:800;margin-bottom:10px">Error al cargar</h2><p style="margin-bottom:20px;color:var(--txt2)">Quedaron datos corruptos.</p><button class="bP" style="width:auto;display:inline-block;padding:12px 32px" onclick="cAD()"><i class="fa-solid fa-trash-can" style="margin-right:6px"></i>Limpiar Datos</button></div>';
+    console.error("Error:", err);
+    app.innerHTML = '<div style="padding:60px 20px;text-align:center;color:var(--dng)"><i class="fa-solid fa-triangle-exclamation" style="font-size:48px;margin-bottom:20px;display:block"></i><h2 style="font-weight:800;margin-bottom:10px">Error al cargar</h2><p style="margin-bottom:20px;color:var(--txt2)">Datos corruptos.</p><button class="bP" style="width:auto;display:inline-block;padding:12px 32px" onclick="cAD()"><i class="fa-solid fa-trash-can" style="margin-right:6px"></i>Limpiar Datos</button></div>';
   }
 }
 
 function renderAuth() {
-  return '<div class="hs"><div class="ho"></div><div id="hCanvas" style="position:absolute;inset:0;z-index:0"></div><div class="hc"><div class="ab"><div style="margin-bottom:24px"><img src="'+WC_LOGO+'" style="width:120px;filter:drop-shadow(0 0 10px rgba(34,197,94,0.5));margin-bottom:8px" alt="WC 2026"><div style="font-size:11px;font-weight:700;color:var(--acc);letter-spacing:3px;text-transform:uppercase;margin-top:12px">Quiniela Oficial</div><h1 class="font-display" style="font-weight:900;font-size:32px;color:var(--txt);margin-top:4px">Mundial 2026</h1><p style="font-size:13px;color:var(--mut);margin-top:4px">Estados Unidos, México y Canadá</p></div><div id="authForm"><input class="fi" id="aE" type="email" placeholder="Correo electronico" style="margin-bottom:10px"><input class="fi" id="aP" type="password" placeholder="Contrasena" style="margin-bottom:10px"><button class="bP" onclick="doLogin()">Iniciar Sesion</button><div style="text-align:center;margin-top:16px"><button class="bG" onclick="showReg()">Crear cuenta</button><span style="margin:0 8px;color:var(--mut)">|</span><button class="bG" onclick="showAdm()">Admin</button></div></div><div id="regForm" style="display:none"><input class="fi" id="rE" type="email" placeholder="Correo" style="margin-bottom:8px"><input class="fi" id="rN" type="text" placeholder="Nombre" style="margin-bottom:8px"><input class="fi" id="rA" type="text" placeholder="Apellido" style="margin-bottom:8px"><input class="fi" id="rP" type="password" placeholder="Contrasena" style="margin-bottom:8px"><input class="fi" id="rC" type="password" placeholder="Repetir" style="margin-bottom:10px"><button class="bP" onclick="doReg()">Registrarse</button><div style="text-align:center;margin-top:12px"><button class="bG" onclick="showLog()">Volver</button></div></div><div id="admForm" style="display:none"><input class="fi" id="dE" type="email" placeholder="Correo admin" style="margin-bottom:10px"><input class="fi" id="dP" type="password" placeholder="Contrasena" style="margin-bottom:10px"><button class="bP" style="background:var(--brd2);color:var(--txt)" onclick="doAdmLogin()">Acceder Admin</button><div style="text-align:center;margin-top:12px"><button class="bG" onclick="showLog()">Volver</button></div></div></div></div></div>';
+  return '<div class="hs"><div class="ho"></div><div id="hCanvas" style="position:absolute;inset:0;z-index:0"></div><div class="hc"><div class="ab"><div style="margin-bottom:24px"><img src="'+WC_LOGO+'" style="width:120px;filter:drop-shadow(0 0 10px rgba(34,197,94,0.5));margin-bottom:8px" alt="WC 2026"><div style="font-size:11px;font-weight:700;color:var(--acc);letter-spacing:3px;text-transform:uppercase;margin-top:12px">Quiniela Oficial</div><h1 class="font-display" style="font-weight:900;font-size:32px;color:var(--txt);margin-top:4px">Mundial 2026</h1><p style="font-size:13px;color:var(--mut);margin-top:4px">Estados Unidos, México y Canadá</p></div><div id="authForm"><input class="fi" id="aE" type="email" placeholder="Correo" style="margin-bottom:10px"><input class="fi" id="aP" type="password" placeholder="Contrasena" style="margin-bottom:10px"><button class="bP" onclick="doLogin()">Iniciar Sesion</button><div style="text-align:center;margin-top:16px"><button class="bG" onclick="showReg()">Crear cuenta</button><span style="margin:0 8px;color:var(--mut)">|</span><button class="bG" onclick="showAdm()">Admin</button></div></div><div id="regForm" style="display:none"><input class="fi" id="rE" type="email" placeholder="Correo" style="margin-bottom:8px"><input class="fi" id="rN" type="text" placeholder="Nombre" style="margin-bottom:8px"><input class="fi" id="rA" type="text" placeholder="Apellido" style="margin-bottom:8px"><input class="fi" id="rP" type="password" placeholder="Contrasena" style="margin-bottom:8px"><input class="fi" id="rC" type="password" placeholder="Repetir" style="margin-bottom:10px"><button class="bP" onclick="doReg()">Registrarse</button><div style="text-align:center;margin-top:12px"><button class="bG" onclick="showLog()">Volver</button></div></div><div id="admForm" style="display:none"><input class="fi" id="dE" type="email" placeholder="Correo admin" style="margin-bottom:10px"><input class="fi" id="dP" type="password" placeholder="Contrasena" style="margin-bottom:10px"><button class="bP" style="background:var(--brd2);color:var(--txt)" onclick="doAdmLogin()">Acceder Admin</button><div style="text-align:center;margin-top:12px"><button class="bG" onclick="showLog()">Volver</button></div></div></div></div></div>';
 }
 function showReg(){document.getElementById("authForm").style.display="none";document.getElementById("regForm").style.display="block";document.getElementById("admForm").style.display="none";}
 function showLog(){document.getElementById("authForm").style.display="block";document.getElementById("regForm").style.display="none";document.getElementById("admForm").style.display="none";}
 function showAdm(){document.getElementById("authForm").style.display="none";document.getElementById("regForm").style.display="none";document.getElementById("admForm").style.display="block";}
-function doLogin(){ var e=document.getElementById("aE").value.trim(), p=document.getElementById("aP").value; dL(e,p); }
-function doReg(){ var e=document.getElementById("rE").value.trim(), p=document.getElementById("rP").value, n=document.getElementById("rN").value.trim(), a=document.getElementById("rA").value.trim(), c=document.getElementById("rC").value; dR(e,p,n,a,c); }
-function doAdmLogin(){ var e=document.getElementById("dE").value.trim(), p=document.getElementById("dP").value; dA(e,p); }
+function doLogin(){ dL(document.getElementById("aE").value.trim(),document.getElementById("aP").value); }
+function doReg(){ dR(document.getElementById("rE").value.trim(),document.getElementById("rP").value,document.getElementById("rN").value.trim(),document.getElementById("rA").value.trim(),document.getElementById("rC").value); }
+function doAdmLogin(){ dA(document.getElementById("dE").value.trim(),document.getElementById("dP").value); }
 
 function renderUser() {
-  var pd=eP(),pr=gPr(pd),pc=Math.round(pr/TOTAL*100),rk=getRanking()[user];
+  var pd=eP(),pr=gPr(pd),TOTAL=getTOTAL(),pc=Math.round(pr/TOTAL*100),rk=getRanking()[user];
   var safeName = "Usuario"; try { safeName = gUN(user) || "Usuario"; } catch(e) { safeName = user ? user.split("@")[0] : "Usuario"; }
   var sh=rk?'<div style="font-size:11px;font-weight:700;color:var(--acc);white-space:nowrap"><i class="fa-solid fa-medal" style="margin-right:3px"></i>#'+rk+'</div>':"";
-  var nav=navItem("groups","fa-table-cells","Fase de Grupos","72",pd)+navItem("r32","fa-forward","Octavos","16",pd)+navItem("r16","fa-shuffle","Cuartos","8",pd)+navItem("qf","fa-code-branch","Semifinal","4",pd)+navItem("sf","fa-trophy","Final","2",pd)+'<div style="margin:10px 8px;border-top:1px solid var(--brd)"></div>'+navItem("summary","fa-list-check","Mi Quiniela","",pd);
+  var cfg=getCfg();
+  var nav=navItem("groups","fa-table-cells","Fase de Grupos",cfg.length*6,pd)+navItem("r32","fa-forward","Octavos",Math.floor(cfg.length*4/3),pd)+navItem("r16","fa-shuffle","Cuartos",Math.floor(cfg.length/3),pd)+navItem("qf","fa-code-branch","Semifinal",Math.floor(cfg.length/6),pd)+navItem("sf","fa-trophy","Final","2",pd)+'<div style="margin:10px 8px;border-top:1px solid var(--brd)"></div>'+navItem("summary","fa-list-check","Mi Quiniela","",pd);
   return '<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><img src="'+WC_LOGO+'" style="width:28px;filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--mut)">Quiniela</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">'+nav+'</nav><div style="padding:12px 14px;border-top:1px solid var(--brd)"><div style="font-size:12px;font-weight:600;color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-bottom:2px">'+esc(safeName)+'</div><div style="font-size:10px;color:var(--mut);margin-bottom:8px">'+esc(user)+'</div><button class="ni" onclick="dO()" style="padding:7px 12px;font-size:12px;color:var(--dng)"><i class="fa-solid fa-right-from-bracket nI"></i> Salir</button></div></aside><div id="ov" class="ov" onclick="tSB()"></div><div class="mc"><div class="tB"><button id="hmb" onclick="tSB()" style="display:none;background:none;border:none;color:var(--txt2);font-size:18px;cursor:pointer"><i class="fa-solid fa-bars"></i></button><div class="font-display" style="font-weight:700;font-size:14px;color:var(--acc)">'+esc(RN[phase])+'</div>'+sh+'<div class="pBar"><div class="pF" style="width:'+pc+'%"></div></div><div style="font-size:11px;font-weight:600;color:var(--txt2)">'+pr+'/'+TOTAL+'</div></div><div style="padding:24px">'+renderPhase(pd)+'</div></div></div>';
 }
 function navItem(id,icon,label,badge,pd) {
@@ -204,44 +214,46 @@ function navItem(id,icon,label,badge,pd) {
 }
 
 function renderPhase(pd) {
-  if(phase==="groups") return renderGroups(pd); if(phase==="r32") return renderKOUser(pd, "r32", 16); if(phase==="r16") return renderKOUser(pd, "r16", 8); if(phase==="qf") return renderKOUser(pd, "qf", 4); if(phase==="sf") return renderFinalUser(pd); if(phase==="summary") return renderSummary(pd); return "";
+  if(phase==="groups") return renderGroups(pd); if(phase==="r32") return renderKOUser(pd, "r32"); if(phase==="r16") return renderKOUser(pd, "r16"); if(phase==="qf") return renderKOUser(pd, "qf"); if(phase==="sf") return renderFinalUser(pd); if(phase==="summary") return renderSummary(pd); return "";
 }
 
 function renderGroups(pd) {
-  var locked=iL("groups"),tabs=["A - D","E - H","I - L"],st=gTab*4,en=st+4,h="";
+  var locked=iL("groups"),cfg=getCfg(),tabs=[],st=gTab*4,en=Math.min(st+4,cfg.length),h="";
+  for(var i=0;i<cfg.length;i+=4) tabs.push(cfg.slice(i,i+4).map(g=>g.n).join(" - "));
   if(locked) h+='<div class="lBan"><i class="fa-solid fa-lock"></i> Fase bloqueada</div>'; else { var tl=tL("groups"); if(tl) h+='<div class="tBan"><i class="fa-solid fa-clock"></i> '+esc(tl)+'</div>'; }
   h+='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:16px">Fase de Grupos</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:16px">1 (Local), X (Empate), 2 (Visitante).</p><div class="sTs">';
-  for(var i=0;i<3;i++) h+='<button class="sTa sTabG'+(gTab===i?" on":"")+'" data-gt="'+i+'">'+esc(tabs[i])+'</button>';
+  for(var i=0;i<tabs.length;i++) h+='<button class="sTa sTabG'+(gTab===i?" on":"")+'" data-gt="'+i+'">'+esc(tabs[i])+'</button>';
   h+='</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px">';
   for(var gi=st;gi<en;gi++) {
-    var st2=calcStandings(gi,pd),done=0; for(var mi=0;mi<6;mi++) if(pd.g[gi+"_"+mi]) done++;
-    h+='<div class="gc"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:17px;color:var(--acc)">Grupo '+GR[gi].n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
+    var g=cfg[gi], st2=calcStandings(gi,pd),done=0; for(var mi=0;mi<6;mi++) if(pd.g[gi+"_"+mi]) done++;
+    h+='<div class="gc"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:17px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
     h+='<div class="sH"><span></span><span>Equipo</span><span style="text-align:center">PJ</span><span style="text-align:center">G</span><span style="text-align:center">E</span><span style="text-align:center">P</span><span style="text-align:center">Pts</span></div>';
     for(var ti=0;ti<4;ti++) {
       var t=st2[ti],clr=ti<2?"var(--acc)":ti===2?"#bbf7d0":"var(--mut)"; var w=t.pts>=3?Math.floor(t.pts/3):0,d2=t.pts-w*3,l=3-w-d2;
-      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">'+esc(FL[t.name]||"")+'</span><span class="tBdg" style="background:'+TC[t.name]+'">'+esc(AB[t.name])+'</span></span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
+      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px">'+tHtml(t)+'</span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
     }
     for(var mi=0;mi<6;mi++) {
       var m=MSI[mi],key=gi+"_"+mi,sel=pd.g[key]||"",dis=locked?' disabled':'';
-      h+='<div class="mR"><div class="mT"><span>'+esc(FL[GR[gi].t[m[0]]]||"")+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span class="mV">VS</span><span>'+esc(FL[GR[gi].t[m[1]]]||"")+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt gb'+(sel==="1"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="1">1</button><button class="rBt gb'+(sel==="X"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="X">X</button><button class="rBt gb'+(sel==="2"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="2">2</button></div></div>';
+      h+='<div class="mR"><div class="mT"><span>'+tHtml(g.t[m[0]],'12px')+'</span><span class="mV">VS</span><span>'+tHtml(g.t[m[1]],'12px')+'</span></div><div class="rB"><button class="rBt gb'+(sel==="1"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="1">1</button><button class="rBt gb'+(sel==="X"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="X">X</button><button class="rBt gb'+(sel==="2"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="2">2</button></div></div>';
     }
     h+='</div>';
   }
   return h+'</div>';
 }
 
-function renderKOUser(pd, ph, count) {
+function renderKOUser(pd, ph) {
   var locked=iL(ph), res=eR().ko[ph], h="";
   if(locked) h+='<div class="lBan"><i class="fa-solid fa-lock"></i> Fase bloqueada</div>'; else { var tl=tL(ph); if(tl) h+='<div class="tBan"><i class="fa-solid fa-clock"></i> '+esc(tl)+'</div>'; }
-  h+='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">'+esc(RN[ph])+'</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:16px">Selecciona el ganador de cada partido.</p><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px">';
-  for(var i=0;i<count;i++) {
-    var m = res[i] || {h:null, a:null, w:null}; var selTeam = pd[ph] ? pd[ph][i] : null; var dis = locked ? " disabled" : "";
+  h+='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">'+esc(RN[ph])+'</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:16px">Selecciona el ganador.</p><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px">';
+  for(var i=0;i<res.length;i++) {
+    var m = res[i]; var selTeam = pd[ph] ? pd[ph][i] : null; var dis = locked ? " disabled" : "";
     if(!m.h || !m.a) { h+='<div class="km dis-match"><div class="kM">Partido '+(i+1)+'</div><div style="padding:20px 0;text-align:center;color:var(--mut)"><i class="fa-solid fa-clock" style="display:block;font-size:24px;margin-bottom:8px"></i><span style="font-size:13px">Equipos por definir</span></div></div>'; }
     else {
+      var tH=getAllTeams().find(x=>x.n===m.h), tA=getAllTeams().find(x=>x.n===m.a);
       h+='<div class="km"><div class="kM">Partido '+(i+1)+(m.w?' <span style="color:var(--acc)">(Finalizado)</span>':'')+'</div>';
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px;margin-bottom:8px"><span style="font-size:14px;font-weight:500">'+esc(FL[m.h]||"")+' '+esc(m.h)+'</span><button class="wB koWin'+(selTeam===m.h?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.h)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div>';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px;margin-bottom:8px"><span style="font-size:14px;font-weight:500">'+tHtml(tH)+'</span><button class="wB koWin'+(selTeam===m.h?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.h)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div>';
       h+='<div style="text-align:center;color:var(--acc);font-size:10px;font-weight:700;margin-bottom:8px">VS</div>';
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px"><span style="font-size:14px;font-weight:500">'+esc(FL[m.a]||"")+' '+esc(m.a)+'</span><button class="wB koWin'+(selTeam===m.a?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.a)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div></div>';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px"><span style="font-size:14px;font-weight:500">'+tHtml(tA)+'</span><button class="wB koWin'+(selTeam===m.a?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.a)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div></div>';
     }
   }
   return h+'</div>';
@@ -256,12 +268,12 @@ function renderFinalUser(pd) {
 }
 
 function renderSummary(pd) {
-  var pr=gPr(pd),rk=getRanking()[user],h='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Mi Quiniela</h2>';
+  var pr=gPr(pd),rk=getRanking()[user],TOTAL=getTOTAL(),h='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Mi Quiniela</h2>';
   if(rk) { h+='<div class="fR" style="margin-bottom:24px"><div style="display:flex;align-items:center;gap:20px"><div style="text-align:center"><div style="font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Tu posicion</div><div class="font-display" style="font-weight:900;font-size:42px;color:var(--acc);line-height:1">#'+rk+'</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">de '+Object.keys(gU()).length+' participantes</div></div>'; }
-  if(hR()) { var sc=calcScore(pd,eR()); h+='<div style="text-align:center"><div style="font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Puntos</div><div class="font-display" style="font-weight:900;font-size:42px;color:var(--acc);line-height:1">'+sc.total+'</div></div></div></div>'; h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:24px">'; h+=sumCard("Grupos",sc.g+"/72","var(--acc)"); h+=sumCard("Octavos",sc.r32+"/16","var(--acc)"); h+=sumCard("Cuartos",sc.r16+"/8","var(--acc)"); h+=sumCard("Semifinal",sc.qf+"/4","var(--acc)"); h+=sumCard("Final",sc.sf+"/2","var(--acc)"); h+=sumCard("Campeon",sc.f+"/1","#bbf7d0"); h+='</div>'; } else { h+='</div></div>'; }
+  if(hR()) { var sc=calcScore(pd,eR()); h+='<div style="text-align:center"><div style="font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Puntos</div><div class="font-display" style="font-weight:900;font-size:42px;color:var(--acc);line-height:1">'+sc.total+'</div></div></div></div>'; h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:24px">'; h+=sumCard("Grupos",sc.g+"/" +(getCfg().length*6),"var(--acc)"); h+=sumCard("Octavos",sc.r32+"/"+Math.floor(getCfg().length*4/3),"var(--acc)"); h+=sumCard("Cuartos",sc.r16+"/"+Math.floor(getCfg().length/3),"var(--acc)"); h+=sumCard("Semifinal",sc.qf+"/"+Math.floor(getCfg().length/6),"var(--acc)"); h+=sumCard("Final",sc.sf+"/2","var(--acc)"); h+=sumCard("Campeon",sc.f+"/1","#bbf7d0"); h+='</div>'; } else { h+='</div></div>'; }
   h+='<div style="padding:16px;border-radius:10px;background:var(--card);border:1px solid var(--brd);margin-bottom:16px"><div style="font-size:13px;font-weight:600;margin-bottom:8px">Progreso</div><div class="pBar" style="height:8px;margin-bottom:8px"><div class="pF" style="width:'+Math.round(pr/TOTAL*100)+'%"></div></div><div style="font-size:12px;color:var(--txt2)">'+pr+' de '+TOTAL+' predicciones ('+Math.round(pr/TOTAL*100)+'%)</div></div>';
-  if(pd.f) h+='<div class="iB"><i class="fa-solid fa-trophy"></i> Campeon: <strong>'+esc(FL[pd.f]||"")+' '+esc(pd.f)+'</strong></div>';
-  if(pd.t) h+='<div class="tBan" style="margin-top:8px"><i class="fa-solid fa-medal"></i> Tercer lugar: <strong>'+esc(FL[pd.t]||"")+' '+esc(pd.t)+'</strong></div>';
+  if(pd.f){var tf=getAllTeams().find(x=>x.n===pd.f); h+='<div class="iB"><i class="fa-solid fa-trophy"></i> Campeon: <strong>'+tHtml(tf)+'</strong></div>';}
+  if(pd.t){var tt=getAllTeams().find(x=>x.n===pd.t); h+='<div class="tBan" style="margin-top:8px"><i class="fa-solid fa-medal"></i> Tercer lugar: <strong>'+tHtml(tt)+'</strong></div>';}
   return h;
 }
 function sumCard(l,v,c) { return '<div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">'+esc(l)+'</div><div class="font-display" style="font-weight:900;font-size:20px;color:'+c+'">'+esc(v)+'</div></div>'; }
@@ -277,12 +289,39 @@ function bindUser() {
 
 /* ========== ADMIN ========== */
 function renderAdmin() {
-  var tabs=["Usuarios","Fechas Limite","Cargar Resultados","Puntuacion"],h='<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><img src="'+WC_LOGO+'" style="width:28px;filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--dng)"><i class="fa-solid fa-shield-halved" style="margin-right:3px"></i>Admin</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">';
-  for(var i=0;i<tabs.length;i++) h+='<button class="ni'+(adminTab===i?" act":"")+'" onclick="adminTab='+i+';adminResTab=0;render()"><i class="fa-solid '+["fa-users","fa-calendar-check","fa-pen-to-square","fa-ranking-star"][i]+' nI"></i>'+esc(tabs[i])+'</button>';
+  var tabs=["Config. Grupos","Usuarios","Fechas Limite","Cargar Resultados","Puntuacion"],h='<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><img src="'+WC_LOGO+'" style="width:28px;filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--dng)"><i class="fa-solid fa-shield-halved" style="margin-right:3px"></i>Admin</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">';
+  for(var i=0;i<tabs.length;i++) h+='<button class="ni'+(adminTab===i?" act":"")+'" onclick="adminTab='+i+';adminResTab=0;render()"><i class="fa-solid '+["fa-futbol","fa-users","fa-calendar-check","fa-pen-to-square","fa-ranking-star"][i]+' nI"></i>'+esc(tabs[i])+'</button>';
   h+='</nav><div style="padding:12px 14px;border-top:1px solid var(--brd)"><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">'+esc(gAN(user))+'</div><div style="font-size:10px;color:var(--mut);margin-bottom:8px">'+esc(user)+'</div><button class="ni" onclick="dAO()" style="padding:7px 12px;font-size:12px;color:var(--dng)"><i class="fa-solid fa-right-from-bracket nI"></i> Salir</button></div></aside><div id="ov" class="ov" onclick="tSB()"></div><div class="mc"><div class="tB"><div class="font-display" style="font-weight:700;font-size:14px;color:var(--acc)">'+esc(tabs[adminTab])+'</div></div><div style="padding:24px">';
-  if(adminTab===0) h+=renderAdmUsers(); else if(adminTab===1) h+=renderAdmLocks(); else if(adminTab===2) h+=renderAdmResults(); else h+=renderAdmScoring();
+  if(adminTab===0) h+=renderAdmConfig(); else if(adminTab===1) h+=renderAdmUsers(); else if(adminTab===2) h+=renderAdmLocks(); else if(adminTab===3) h+=renderAdmResults(); else h+=renderAdmScoring();
   return h+'</div></div></div>';
 }
+
+/* NUEVO: PANEL DE CONFIGURACIÓN DE GRUPOS */
+function renderAdmConfig() {
+  var cfg=getCfg(), h='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Configurar Grupos y Equipos</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:20px">Agrega los escudos (logos) oficiales. Si no hay imagen, se mostrará el nombre completo.</p>';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:16px">';
+  for(var gi=0;gi<cfg.length;gi++) {
+    var g=cfg[gi];
+    h+='<div class="kmC" style="border-color:var(--brd2)"><div class="gHd" style="margin:-14px -14px 10px"><span class="font-display" style="font-weight:800;font-size:16px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:var(--mut)">'+g.t.length+' equipos</span></div>';
+    for(var ti=0;ti<g.t.length;ti++) {
+      var t=g.t[ti];
+      h+='<div style="display:grid;grid-template-columns:40px 1fr 1fr;gap:8px;align-items:center;margin-bottom:8px">';
+      h+='<div style="display:flex;justify-content:center">'+(t.i ? '<img src="'+esc(t.i)+'" class="team-crest" style="width:40px;height:40px" onerror="this.outerHTML=\'<span style=\\"font-size:10px;color:var(--mut)\\">Sin img</span>\'">' : '<span style="font-size:10px;color:var(--mut)"><i class="fa-solid fa-image"></i></span>')+'</div>';
+      h+='<div><div class="frmR" style="margin-bottom:4px"><label style="font-size:10px">Nombre Completo</label><input class="fi" value="'+esc(t.n)+'" onchange="updTeam('+gi+','+ti+',\'n\',this.value)"></div></div>';
+      h+='<div><div class="frmR" style="margin-bottom:4px"><label style="font-size:10px">Abreviatura</label><input class="fi" style="max-width:80px;text-transform:uppercase" value="'+esc(t.a)+'" onchange="updTeam('+gi+','+ti+',\'a\',this.value)"></div></div>';
+      h+='</div>';
+    }
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px"><button class="bS out" onclick="addTeam('+gi+')" style="width:100%"><i class="fa-solid fa-plus" style="margin-right:4px"></i>Añadir Equipo</button><button class="bS dng" onclick="delGroup('+gi+')" style="width:100%"><i class="fa-solid fa-trash-can" style="margin-right:4px"></i>Borrar Grupo</button></div>';
+    h+='</div>';
+  }
+  h+='<div style="margin-top:16px;display:flex;gap:10px"><button class="bP" style="width:auto;padding:10px 24px" onclick="addGroup()"><i class="fa-solid fa-plus" style="margin-right:6px"></i>Crear Nuevo Grupo</button><button class="bS out" style="width:auto;padding:10px 24px" onclick="resetConfig()"><i class="fa-solid fa-rotate-left" style="margin-right:6px"></i>Restablecer Todo</button></div>';
+  return h+'</div>';
+}
+function updTeam(gi,ti,key,val) { var c=getCfg(); c[gi].t[ti][key]=val; setCfg(c); render(); }
+function addTeam(gi) { var c=getCfg(); c[gi].t.push({n:"Nuevo Equipo",a:"NNN",i:""}); setCfg(c); toast("Equipo añadido","tS"); render(); }
+function delGroup(gi) { if(getCfg().length<=2) return toast("Mínimo 2 grupos","tE"); var c=getCfg(); c.splice(gi,1); setCfg(c); toast("Grupo borrado","tS"); render(); }
+function addGroup() { var c=getCfg(); var letters="ABCDEFGHIJKLMNOPQRSTUVWXYZ"; var n=letters[c.length] || (c.length+1); c.push({n:n, t:[{n:"Equipo 1",a:"EQ1",i:""},{n:"Equipo 2",a:"EQ2",i:""},{n:"Equipo 3",a:"EQ3",i:""},{n:"Equipo 4",a:"EQ4",i:""}]}); setCfg(c); toast("Grupo "+n+" creado","tS"); render(); }
+function resetConfig() { try { localStorage.removeItem("wc26_cfg"); } catch(e) {} toast("Configuración restablecida","tS"); render(); }
 
 function renderAdmUsers() {
   var u=gU(),keys=Object.keys(u),h="";
@@ -291,7 +330,7 @@ function renderAdmUsers() {
   if(!keys.length) return h+'<div class="lkX"><i class="fa-solid fa-user-slash" style="display:block;font-size:44px;color:var(--mut);margin-bottom:16px"></i><div style="font-size:14px;color:var(--txt2)">Sin usuarios</div></div>';
   var rk=getRanking();
   h+='<div style="overflow-x:auto"><table class="aTb"><thead><tr><th>Nombre</th><th>Correo</th><th>Progreso</th>'+(hR()?'<th>Puntos</th><th>Pos.</th>':'')+'<th></th></tr></thead><tbody>';
-  keys.forEach(e=>{var ud=u[e],nm=(ud.n||"")+(ud.a?" "+ud.a:""),pd=gUP(e),pr=gPr(pd),pc=Math.round(pr/TOTAL*100); h+='<tr><td style="font-weight:500">'+esc(nm||e.split("@")[0])+'</td><td style="color:var(--txt2);font-size:11px">'+esc(e)+'</td><td><div style="display:flex;align-items:center;gap:8px"><div class="pBar" style="width:60px;height:6px"><div class="pF" style="width:'+pc+'%"></div></div><span style="font-size:10px;color:var(--mut)">'+pr+'/'+TOTAL+'</span></div></td>'; if(hR()){var sc=calcScore(pd,eR()); h+='<td><span class="sP sOk">'+sc.total+'</span></td><td style="font-size:11px;color:var(--acc);font-weight:700">'+(rk[e]?"#"+rk[e]:"--")+'</td>';} h+='<td style="white-space:nowrap"><button class="bS out" onclick="adminViewUser=\''+esc(e).replace(/'/g,"\\'")+'\';render()">Ver</button> <button class="bS dng" onclick="pendingDel={type:\'user\',email:\''+esc(e).replace(/'/g,"\\'")+'\'};render()"><i class="fa-solid fa-trash-can"></i></button></td></tr>';});
+  keys.forEach(e=>{var ud=u[e],nm=(ud.n||"")+(ud.a?" "+ud.a:""),pd=gUP(e),pr=gPr(pd),pc=Math.round(pr/getTOTAL()*100); h+='<tr><td style="font-weight:500">'+esc(nm||e.split("@")[0])+'</td><td style="color:var(--txt2);font-size:11px">'+esc(e)+'</td><td><div style="display:flex;align-items:center;gap:8px"><div class="pBar" style="width:60px;height:6px"><div class="pF" style="width:'+pc+'%"></div></div><span style="font-size:10px;color:var(--mut)">'+pr+'/'+getTOTAL()+'</span></div></td>'; if(hR()){var sc=calcScore(pd,eR()); h+='<td><span class="sP sOk">'+sc.total+'</span></td><td style="font-size:11px;color:var(--acc);font-weight:700">'+(rk[e]?"#"+rk[e]:"--")+'</td>';} h+='<td style="white-space:nowrap"><button class="bS out" onclick="adminViewUser=\''+esc(e).replace(/'/g,"\\'")+'\';render()">Ver</button> <button class="bS dng" onclick="pendingDel={type:\'user\',email:\''+esc(e).replace(/'/g,"\\'")+'\'};render()"><i class="fa-solid fa-trash-can"></i></button></td></tr>';});
   return h+'</tbody></table></div>';
 }
 function delUser(e){var u=gU();delete u[e];sUU(u);try{localStorage.removeItem("wc26_p_"+e);}catch(x){}if(adminViewUser===e)adminViewUser=null;pendingDel=null;toast("Eliminado","tS");render();}
@@ -311,13 +350,13 @@ function renderAdmResults() {
 }
 
 function renderResGroups() {
-  var res=eR(),h='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">';
-  for(var gi=0;gi<12;gi++) {
-    var done=0; for(var mi=0;mi<6;mi++) if(res.g[gi+"_"+mi]) done++;
-    h+='<div class="kmC"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:16px;color:var(--acc)">Grupo '+GR[gi].n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
+  var res=eR(),cfg=getCfg(),h='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px">';
+  for(var gi=0;gi<cfg.length;gi++) {
+    var g=cfg[gi],done=0; for(var mi=0;mi<6;mi++) if(res.g[gi+"_"+mi]) done++;
+    h+='<div class="kmC"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:16px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
     for(var mi=0;mi<6;mi++) {
       var m=MSI[mi],key=gi+"_"+mi,sel=res.g[key]||"";
-      h+='<div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:4px"><div style="display:flex;align-items:center;gap:5px;font-size:12px"><span>'+esc(FL[GR[gi].t[m[0]]]||"")+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span style="color:var(--mut);font-size:10px">VS</span><span>'+esc(FL[GR[gi].t[m[1]]]||"")+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt rbRes'+(sel==="1"?" on":"")+'" data-rk="'+key+'" data-rv="1">1</button><button class="rBt rbRes'+(sel==="X"?" on":"")+'" data-rk="'+key+'" data-rv="X">X</button><button class="rBt rbRes'+(sel==="2"?" on":"")+'" data-rk="'+key+'" data-rv="2">2</button></div></div>';
+      h+='<div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:4px"><div style="display:flex;align-items:center;gap:5px;font-size:12px"><span>'+tHtml(g.t[m[0]],'12px')+'</span><span style="color:var(--mut);font-size:10px">VS</span><span>'+tHtml(g.t[m[1]],'12px')+'</span></div><div class="rB"><button class="rBt rbRes'+(sel==="1"?" on":"")+'" data-rk="'+key+'" data-rv="1">1</button><button class="rBt rbRes'+(sel==="X"?" on":"")+'" data-rk="'+key+'" data-rv="X">X</button><button class="rBt rbRes'+(sel==="2"?" on":"")+'" data-rk="'+key+'" data-rv="2">2</button></div></div>';
     }
     h+='</div>';
   }
@@ -332,7 +371,7 @@ function renderResKO(ph, label) {
     h+='<div class="frmR"><label>Equipo Local</label><select class="dti resKO" data-rki="'+ph+'|'+i+'|h">'+teamOpts(m.h)+'</select></div>';
     h+='<div style="text-align:center;padding:2px 0"><span style="color:var(--acc);font-size:10px;font-weight:700;letter-spacing:1px">VS</span></div>';
     h+='<div class="frmR"><label>Equipo Visitante</label><select class="dti resKO" data-rki="'+ph+'|'+i+'|a">'+teamOpts(m.a)+'</select></div>';
-    h+='<div style="display:flex;gap:6px;margin-top:8px"><button class="wB resKW'+(m.w===m.h?" on":"")+'" data-rki="'+ph+'|'+i+'" data-rkt="'+esc(m.h||"")+'" '+(m.h?'':'disabled')+'><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana '+esc(AB[m.h]||"Local")+'</button><button class="wB resKW'+(m.w===m.a?" on":"")+'" data-rki="'+ph+'|'+i+'" data-rkt="'+esc(m.a||"")+'" '+(m.a?'':'disabled')+'><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana '+esc(AB[m.a]||"Visita")+'</button></div></div>';
+    h+='<div style="display:flex;gap:6px;margin-top:8px"><button class="wB resKW'+(m.w===m.h?" on":"")+'" data-rki="'+ph+'|'+i+'" data-rkt="'+esc(m.h||"")+'" '+(m.h?'':'disabled')+'><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana '+esc(m.h?getAllTeams().find(x=>x.n===m.h).a:"Local")+'</button><button class="wB resKW'+(m.w===m.a?" on":"")+'" data-rki="'+ph+'|'+i+'" data-rkt="'+esc(m.a||"")+'" '+(m.a?'':'disabled')+'><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana '+esc(m.a?getAllTeams().find(x=>x.n===m.a).a:"Visita")+'</button></div></div>';
   }
   return h+'</div><div style="margin-top:16px"><button class="bS dng" onclick="clearResPhase(\''+ph+'\')"><i class="fa-solid fa-eraser" style="margin-right:4px"></i>Limpiar '+esc(label)+'</button></div>';
 }
@@ -355,11 +394,11 @@ function renderAdmScoring() {
 }
 
 function renderAdminView() {
-  var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+TOTAL+'</div></div></div>';
+  var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+getTOTAL()+'</div></div></div>';
   if(hR()){var sc=calcScore(pd,eR()),rk2=getRanking()[adminViewUser]; h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px"><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">POSICION</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">#'+(rk2||"--")+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">PUNTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">'+sc.total+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">ACIERTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--txt)">'+(sc.g+sc.r32+sc.r16+sc.qf+sc.sf+sc.f+sc.t)+'</div></div></div>';}
-  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
-  ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length,total=KO_CONFIG[ph]; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+total+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px;margin-right:3px"></i>'+esc(FL[pd[ph][k]]||"")+' '+esc(pd[ph][k]||"?")+'</div>'; h+='</div>';});
-  if(pd.f) h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;margin-top:4px">'+esc(FL[pd.f]||"")+' '+esc(pd.f)+'</div></div>';
+  h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr);gap:10px">';
+  ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+eR().ko[ph].length+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px;margin-right:3px"></i>'+esc(getAllTeams().find(x=>x.n===pd[ph][k])?.a||"?")+'</div>'; h+='</div>';});
+  if(pd.f){var tf=getAllTeams().find(x=>x.n===pd.f); h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;margin-top:4px">'+tHtml(tf)+'</div></div>';}
   return h+'</div>';
 }
 
