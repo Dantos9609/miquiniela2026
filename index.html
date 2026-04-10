@@ -83,7 +83,6 @@
 <div id="toasts" class="toastC"></div>
 <script>
 var user = null, isAdmin = false, phase = "groups", gTab = 0, adminTab = 0, adminResTab = 0, adminViewUser = null, isRO = false, pendingDel = null, cRAF = null;
-/* 1. ELIMINACIÓN DEL LOGO ROTO */
 var WC_LOGO = ""; 
 
 function sG(k, fb) { try { var r = localStorage.getItem(k); if (r === null) return fb; var p = JSON.parse(r); return (p === null || p === undefined) ? fb : p; } catch (e) { return fb; } }
@@ -112,7 +111,6 @@ function getCfg() { return sG("wc26_cfg", DEF_CONFIG); }
 function setCfg(c) { sS("wc26_cfg", c); }
 function getAllTeams() { var c = getCfg(), arr = []; c.forEach(g => g.t.forEach(t => arr.push(t))); return arr; }
 
-/* 3. REGLA ESTRICTA DE VISUALIZACIÓN */
 function handleImgErr(img, name, abbr, size) {
    var span = document.createElement('span');
    span.style.cssText = 'display:inline-flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500';
@@ -297,24 +295,30 @@ function bindUser() {
 
 /* ========== ADMIN ========== */
 function renderAdmin() {
-  var tabs=["Config. Grupos","Usuarios","Fechas Limite","Cargar Resultados","Puntuacion"],h='<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><i class="fa-solid fa-trophy" style="font-size:24px;color:var(--acc);filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"></i><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--dng)"><i class="fa-solid fa-shield-halved" style="margin-right:3px"></i>Admin</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">';
-  for(var i=0;i<tabs.length;i++) h+='<button class="ni'+(adminTab===i?" act":"")+'" onclick="adminTab='+i+';adminResTab=0;render()"><i class="fa-solid '+["fa-futbol","fa-users","fa-calendar-check","fa-pen-to-square","fa-ranking-star"][i]+' nI"></i>'+esc(tabs[i])+'</button>';
+  // SE AGREGÓ "Admins" AL MENÚ
+  var tabs=["Config. Grupos","Usuarios","Fechas Limite","Cargar Resultados","Puntuacion","Admins"],h='<div class="flex min-h-screen"><aside id="sb" class="sb"><div style="padding:18px 16px;border-bottom:1px solid var(--brd);display:flex;align-items:center;gap:10px"><i class="fa-solid fa-trophy" style="font-size:24px;color:var(--acc);filter:drop-shadow(0 0 4px rgba(34,197,94,0.5))"></i><div><div class="font-display" style="font-weight:900;font-size:16px;color:var(--acc)">WC 2026</div><div style="font-size:10px;color:var(--dng)"><i class="fa-solid fa-shield-halved" style="margin-right:3px"></i>Admin</div></div></div><nav style="flex:1;padding:10px 8px;overflow-y:auto">';
+  for(var i=0;i<tabs.length;i++) h+='<button class="ni'+(adminTab===i?" act":"")+'" onclick="adminTab='+i+';adminResTab=0;render()"><i class="fa-solid '+["fa-futbol","fa-users","fa-calendar-check","fa-pen-to-square","fa-ranking-star","fa-user-shield"][i]+' nI"></i>'+esc(tabs[i])+'</button>';
   h+='</nav><div style="padding:12px 14px;border-top:1px solid var(--brd)"><div style="font-size:12px;font-weight:600;color:var(--txt);margin-bottom:2px">'+esc(gAN(user))+'</div><div style="font-size:10px;color:var(--mut);margin-bottom:8px">'+esc(user)+'</div><button class="ni" onclick="dAO()" style="padding:7px 12px;font-size:12px;color:var(--dng)"><i class="fa-solid fa-right-from-bracket nI"></i> Salir</button></div></aside><div id="ov" class="ov" onclick="tSB()"></div><div class="mc"><div class="tB"><div class="font-display" style="font-weight:700;font-size:14px;color:var(--acc)">'+esc(tabs[adminTab])+'</div></div><div style="padding:24px">';
-  if(adminTab===0) h+=renderAdmConfig(); else if(adminTab===1) h+=renderAdmUsers(); else if(adminTab===2) h+=renderAdmLocks(); else if(adminTab===3) h+=renderAdmResults(); else h+=renderAdmScoring();
+  
+  // SE AGREGÓ LA CONDICIÓN PARA LA NUEVA PESTAÑA
+  if(adminTab===0) h+=renderAdmConfig(); 
+  else if(adminTab===1) h+=renderAdmUsers(); 
+  else if(adminTab===2) h+=renderAdmLocks(); 
+  else if(adminTab===3) h+=renderAdmResults(); 
+  else if(adminTab===4) h+=renderAdmScoring();
+  else if(adminTab===5) h+=renderAdmAdmins();
+  
   return h+'</div></div></div>';
 }
 
-/* 2. PANEL DE CONFIGURACIÓN CON CAMPO URL */
 function renderAdmConfig() {
   var cfg=getCfg(), h='<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Configurar Grupos y Equipos</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:20px">Agrega los escudos oficiales. Si el enlace falla o está vacío, se mostrará el nombre completo.</p>';
-  
   var tabs=[],st=gTab*4,en=Math.min(st+4,cfg.length);
   for(var i=0;i<cfg.length;i+=4) tabs.push(cfg.slice(i,i+4).map(g=>g.n).join(" - "));
   if(iL("groups")) h+='<div class="lBan"><i class="fa-solid fa-lock"></i> Fase bloqueada</div>'; else { var tl=tL("groups"); if(tl) h+='<div class="tBan"><i class="fa-solid fa-clock"></i> '+esc(tl)+'</div>'; }
   h+='<div class="sTs">';
   for(var i=0;i<tabs.length;i++) h+='<button class="sTa sTabG'+(gTab===i?" on":"")+'" data-gt="'+i+'">'+esc(tabs[i])+'</button>';
   h+='</div><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(450px,1fr));gap:16px">';
-  
   for(var gi=st;gi<en;gi++) {
     var g=cfg[gi];
     h+='<div class="kmC" style="border-color:var(--brd2)"><div class="gHd" style="margin:-14px -14px 10px"><span class="font-display" style="font-weight:800;font-size:16px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:var(--mut)">'+g.t.length+' equipos</span></div>';
@@ -408,6 +412,74 @@ function renderAdmScoring() {
   sorted.forEach((e,i)=>{var pd=gUP(e),sc=calcScore(pd,eR()),bg=i===0?"rgba(34,197,94,.15)":i===1?"rgba(34,197,94,.08)":i===2?"rgba(34,197,94,.04)":"var(--card)",border=i===0?"rgba(34,197,94,.4)":i===1?"rgba(34,197,94,.2)":i===2?"rgba(34,197,94,.15)":"var(--brd)";
   h+='<div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:10px;background:'+bg+';border:1px solid '+border+'"><div style="font-weight:900;font-size:18px;color:'+(i<3?"var(--acc)":"var(--mut)")+';width:30px;text-align:center">#'+(i+1)+'</div><div style="flex:1"><div style="font-weight:600;font-size:14px">'+esc(gUN(e))+'</div><div style="font-size:11px;color:var(--mut)">'+esc(e)+'</div></div><div class="font-display" style="font-weight:900;font-size:22px;color:var(--acc)">'+sc.total+'</div></div>';});
   return h+'</div>';
+}
+
+/* NUEVA FUNCIÓN: MANEJO DE NUEVOS ADMINS */
+function renderAdmAdmins() {
+  var admins = gA();
+  var keys = Object.keys(admins);
+  var h = '<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Administrar Cuentas Admin</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:20px">Agrega nuevos administradores con acceso completo al panel.</p>';
+
+  // Formulario de creación
+  h += '<div class="kmC" style="margin-bottom:24px">';
+  h += '<div class="kM"><i class="fa-solid fa-user-plus" style="margin-right:4px"></i> Nuevo Administrador</div>';
+  h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
+  h += '<div class="frmR"><label>Correo Electrónico</label><input class="fi" id="naE" type="email" placeholder="correo@ejemplo.com"></div>';
+  h += '<div class="frmR"><label>Contraseña (Min. 6)</label><input class="fi" id="naP" type="password" placeholder="********"></div>';
+  h += '<div class="frmR"><label>Nombre</label><input class="fi" id="naN" type="text" placeholder="Nombre"></div>';
+  h += '<div class="frmR"><label>Apellido</label><input class="fi" id="naA" type="text" placeholder="Apellido"></div>';
+  h += '</div>';
+  h += '<button class="bP" style="width:100%;margin-top:10px" onclick="addAdminAcc()"><i class="fa-solid fa-plus" style="margin-right:6px"></i>Registrar Admin</button>';
+  h += '</div>';
+
+  // Lista de admins actuales
+  h += '<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Admins Actuales ('+keys.length+')</h3>';
+  h += '<div style="display:grid;gap:8px">';
+  
+  keys.forEach(k => {
+    var adm = admins[k];
+    var isMe = (k === user); // Evitar que el admin se elimine a sí mismo y se quede fuera
+    h += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd)">';
+    h += '<div style="display:flex;align-items:center;gap:12px">';
+    h += '<div style="width:36px;height:36px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;color:var(--acc)"><i class="fa-solid fa-user-shield"></i></div>';
+    h += '<div><div style="font-weight:600;font-size:14px">'+esc(adm.n)+' '+(esc(adm.a)||'')+(isMe?' <span style="font-size:10px;color:var(--acc);font-weight:700">(Tú)</span>':'')+'</div><div style="font-size:11px;color:var(--mut)">'+esc(k)+'</div></div>';
+    h += '</div>';
+    
+    if(!isMe) {
+      h += '<button class="bS dng" onclick="delAdminAcc(\''+esc(k).replace(/'/g,"\\'")+'\')"><i class="fa-solid fa-trash-can" style="margin-right:4px"></i>Eliminar</button>';
+    }
+    h += '</div>';
+  });
+  
+  h += '</div>';
+  return h;
+}
+
+function addAdminAcc() {
+  var e = document.getElementById("naE").value.trim();
+  var n = document.getElementById("naN").value.trim();
+  var a = document.getElementById("naA").value.trim();
+  var p = document.getElementById("naP").value;
+
+  if(!e || !p || !n) return toast("Correo, nombre y contraseña son obligatorios", "tE");
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) return toast("Correo inválido", "tE");
+  if(p.length < 6) return toast("La contraseña debe tener al menos 6 caracteres", "tE");
+
+  var admins = gA();
+  if(admins[e]) return toast("Este correo ya tiene cuenta de administrador", "tE");
+
+  admins[e] = { p: btoa(p), n: n, a: a };
+  sAA(admins);
+  toast("Admin agregado exitosamente", "tS");
+  render();
+}
+
+function delAdminAcc(e) {
+  var admins = gA();
+  delete admins[e];
+  sAA(admins);
+  toast("Cuenta de administrador eliminada", "tS");
+  render();
 }
 
 function renderAdminView() {
