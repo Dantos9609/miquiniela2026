@@ -9,7 +9,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script>tailwind.config={theme:{extend:{fontFamily:{display:['Outfit','sans-serif'],body:['Space Grotesk','sans-serif']}}}}</script>
 <style>
-/* PALETA DE COLORES: INSPIRADA EN CANCHA DE FÚTBOL */
 :root{--bg:#040a04;--bg2:#081208;--card:#0f1f0f;--brd:#1a3a1a;--brd2:#2a5a2a;--acc:#22c55e;--acc2:#4ade80;--aG:rgba(34,197,94,.12);--grn:#86efac;--txt:#f0fdf4;--txt2:#bbf7d0;--mut:#6b8a6b;--dng:#ef4444}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
@@ -75,9 +74,8 @@ body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--txt
 .sOk{background:rgba(34,197,94,.12);color:#86efac}
 .frmR{margin-bottom:10px}.frmR label{display:block;font-size:11px;font-weight:600;margin-bottom:5px;color:var(--txt2)}
 .dis-match{opacity: 0.5; pointer-events: none;}
-.team-crest{width:26px;height:26px;object-fit:contain;border-radius:3px;flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))}
 *:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}.team-crest{width:22px;height:22px}}
+@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -101,6 +99,10 @@ var GR = [
   { n: "K", t: ["Emiratos Arabes","Dinamarca","Serbia","Panama"] }, { n: "L", t: ["Irak","Austria","Turquia","Noruega"] }
 ];
 var MSI = [[0,1],[2,3],[0,2],[1,3],[0,3],[1,2]];
+
+/* BANDERAS NATIVAS (EMOJIS) */
+var FL = {"Estados Unidos":"🇺🇸","Francia":"🇫🇷","Senegal":"🇸🇳","Nueva Zelanda":"🇳🇿","Mexico":"🇲🇽","Alemania":"🇩🇪","Nigeria":"🇳🇬","Peru":"🇵🇪","Canada":"🇨🇦","Espana":"🇪🇸","Camerun":"🇨🇲","Siria":"🇸🇾","Argentina":"🇦🇷","Croacia":"🇭🇷","Egipto":"🇪🇬","Costa Rica":"🇨🇷","Brasil":"🇧🇷","Inglaterra":"🇬🇧","Marruecos":"🇲🇦","Japon":"🇯🇵","Uruguay":"🇺🇾","Portugal":"🇵🇹","Ghana":"🇬🇭","Corea del Sur":"🇰🇷","Colombia":"🇨🇴","Paises Bajos":"🇳🇱","Argelia":"🇩🇿","Iran":"🇮🇷","Ecuador":"🇪🇨","Belgica":"🇧🇪","Tunez":"🇹🇳","Arabia Saudita":"🇸🇦","Chile":"🇨🇱","Italia":"🇮🇹","Costa de Marfil":"🇨🇮","Australia":"🇦🇺","Qatar":"🇶🇦","Suiza":"🇨🇭","Polonia":"🇵🇱","Jamaica":"🇯🇲","Emiratos Arabes":"🇦🇪","Dinamarca":"🇩🇰","Serbia":"🇷🇸","Panama":"🇵🇦","Irak":"🇮🇶","Austria":"🇦🇹","Turquia":"🇹🇷","Noruega":"🇳🇴"};
+
 var AB = {"Estados Unidos":"USA","Francia":"FRA","Senegal":"SEN","Nueva Zelanda":"NZL","Mexico":"MEX","Alemania":"GER","Nigeria":"NGA","Peru":"PER","Canada":"CAN","Espana":"ESP","Camerun":"CMR","Siria":"SYR","Argentina":"ARG","Croacia":"CRO","Egipto":"EGY","Costa Rica":"CRC","Brasil":"BRA","Inglaterra":"ENG","Marruecos":"MAR","Japon":"JPN","Uruguay":"URU","Portugal":"POR","Ghana":"GHA","Corea del Sur":"KOR","Colombia":"COL","Paises Bajos":"NED","Argelia":"ALG","Iran":"IRN","Ecuador":"ECU","Belgica":"BEL","Tunez":"TUN","Arabia Saudita":"KSA","Chile":"CHI","Italia":"ITA","Costa de Marfil":"CIV","Australia":"AUS","Qatar":"QAT","Suiza":"SUI","Polonia":"POL","Jamaica":"JAM","Emiratos Arabes":"UAE","Dinamarca":"DEN","Serbia":"SRB","Panama":"PAN","Irak":"IRQ","Austria":"AUT","Turquia":"TUR","Noruega":"NOR"};
 var TC = {}; (function () { var c = ["#1a4b8c","#1a3a7a","#1a8a52","#2a2a40","#0a7a3e","#2a2a2a","#0a8a55","#cc2030","#cc2020","#b81020","#1a7a40","#b81020","#5a9ad0","#cc2030","#b81828","#1a3a7a","#2a8a30","#8a2030","#b82028","#2a2a80","#5ab0d8","#1a6a2a","#b81828","#b82838","#d4a020","#e87820","#1a6a38","#2a9a48","#d4b020","#c82838","#c81818","#1a7a38","#c82828","#1a8a48","#d88020","#c8a820","#8a1a38","#cc2020","#b81838","#1a9a3a","#1a7a38","#b81828","#b83038","#1a3878","#b81828","#b82838","#a81828"]; var keys = Object.keys(AB); for (var i = 0; i < keys.length; i++) TC[keys[i]] = c[i % c.length]; })();
 var ALL_TEAMS = Object.keys(AB);
@@ -108,64 +110,6 @@ var KO_CONFIG = { r32: 16, r16: 8, qf: 4, sf: 2 };
 var RN = { groups: "Fase de Grupos", r32: "Octavos de Final", r16: "Cuartos de Final", qf: "Semifinal", sf: "Final", summary: "Mi Quiniela" };
 var TOTAL = 72 + 16 + 8 + 4 + 2 + 2;
 var WC_LOGO = "https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/2026_FIFA_World_Cup.svg/200px-2026_FIFA_World_Cup.svg.png";
-
-/* ESCUDOS OFICIALES */
-var CRESTS = {
-"Estados Unidos":"https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/United_States_men%27s_national_soccer_team_logo.svg/100px-United_States_men%27s_national_soccer_team_logo.svg.png",
-"Francia":"https://upload.wikimedia.org/wikipedia/en/thumb/c/c3/France_national_football_team_logo.svg/100px-France_national_football_team_logo.svg.png",
-"Senegal":"https://upload.wikimedia.org/wikipedia/en/thumb/4/44/Senegal_national_football_team_logo.svg/100px-Senegal_national_football_team_logo.svg.png",
-"Nueva Zelanda":"https://upload.wikimedia.org/wikipedia/en/thumb/4/4a/New_Zealand_national_football_team_logo.svg/100px-New_Zealand_national_football_team_logo.svg.png",
-"Mexico":"https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Mexico_national_football_team_logo.svg/100px-Mexico_national_football_team_logo.svg.png",
-"Alemania":"https://upload.wikimedia.org/wikipedia/en/thumb/d/df/Germany_national_football_team_logo.svg/100px-Germany_national_football_team_logo.svg.png",
-"Nigeria":"https://upload.wikimedia.org/wikipedia/en/thumb/0/03/Nigeria_national_football_team_logo.svg/100px-Nigeria_national_football_team_logo.svg.png",
-"Peru":"https://upload.wikimedia.org/wikipedia/en/thumb/f/f4/Peru_national_football_team_logo.svg/100px-Peru_national_football_team_logo.svg.png",
-"Canada":"https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Canada_national_football_team_logo.svg/100px-Canada_national_football_team_logo.svg.png",
-"Espana":"https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Spain_national_football_team_logo.svg/100px-Spain_national_football_team_logo.svg.png",
-"Camerun":"https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Cameroon_national_football_team_logo.svg/100px-Cameroon_national_football_team_logo.svg.png",
-"Siria":"https://upload.wikimedia.org/wikipedia/en/thumb/2/25/Syria_national_football_team_logo.svg/100px-Syria_national_football_team_logo.svg.png",
-"Argentina":"https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Argentina_national_football_team_logo.svg/100px-Argentina_national_football_team_logo.svg.png",
-"Croacia":"https://upload.wikimedia.org/wikipedia/en/thumb/b/b3/Croatia_national_football_team_logo.svg/100px-Croatia_national_football_team_logo.svg.png",
-"Egipto":"https://upload.wikimedia.org/wikipedia/en/thumb/4/40/Egypt_national_football_team_logo.svg/100px-Egypt_national_football_team_logo.svg.png",
-"Costa Rica":"https://upload.wikimedia.org/wikipedia/en/thumb/2/27/Costa_Rica_national_football_team_logo.svg/100px-Costa_Rica_national_football_team_logo.svg.png",
-"Brasil":"https://upload.wikimedia.org/wikipedia/en/thumb/e/e1/Brazil_national_football_team_logo.svg/100px-Brazil_national_football_team_logo.svg.png",
-"Inglaterra":"https://upload.wikimedia.org/wikipedia/en/thumb/b/b3/England_national_football_team_logo.svg/100px-England_national_football_team_logo.svg.png",
-"Marruecos":"https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Morocco_national_football_team_logo.svg/100px-Morocco_national_football_team_logo.svg.png",
-"Japon":"https://upload.wikimedia.org/wikipedia/en/thumb/2/2c/Japan_national_football_team_logo.svg/100px-Japan_national_football_team_logo.svg.png",
-"Uruguay":"https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Uruguay_national_football_team_logo.svg/100px-Uruguay_national_football_team_logo.svg.png",
-"Portugal":"https://upload.wikimedia.org/wikipedia/en/thumb/5/5a/Portugal_national_football_team_logo.svg/100px-Portugal_national_football_team_logo.svg.png",
-"Ghana":"https://upload.wikimedia.org/wikipedia/en/thumb/c/cd/Ghana_national_football_team_logo.svg/100px-Ghana_national_football_team_logo.svg.png",
-"Corea del Sur":"https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/South_Korea_national_football_team_logo.svg/100px-South_Korea_national_football_team_logo.svg.png",
-"Colombia":"https://upload.wikimedia.org/wikipedia/en/thumb/2/2a/Colombia_national_football_team_logo.svg/100px-Colombia_national_football_team_logo.svg.png",
-"Paises Bajos":"https://upload.wikimedia.org/wikipedia/en/thumb/4/4b/Netherlands_national_football_team_logo.svg/100px-Netherlands_national_football_team_logo.svg.png",
-"Argelia":"https://upload.wikimedia.org/wikipedia/en/thumb/4/45/Algeria_national_football_team_logo.svg/100px-Algeria_national_football_team_logo.svg.png",
-"Iran":"https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/Iran_national_football_team_logo.svg/100px-Iran_national_football_team_logo.svg.png",
-"Ecuador":"https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Ecuador_national_football_team_logo.svg/100px-Ecuador_national_football_team_logo.svg.png",
-"Belgica":"https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Belgium_national_football_team_logo.svg/100px-Belgium_national_football_team_logo.svg.png",
-"Tunez":"https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Tunisia_national_football_team_logo.svg/100px-Tunisia_national_football_team_logo.svg.png",
-"Arabia Saudita":"https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/Saudi_Arabia_national_football_team_logo.svg/100px-Saudi_Arabia_national_football_team_logo.svg.png",
-"Chile":"https://upload.wikimedia.org/wikipedia/en/thumb/8/87/Chile_national_football_team_logo.svg/100px-Chile_national_football_team_logo.svg.png",
-"Italia":"https://upload.wikimedia.org/wikipedia/en/thumb/0/05/Italy_national_football_team_logo.svg/100px-Italy_national_football_team_logo.svg.png",
-"Costa de Marfil":"https://upload.wikimedia.org/wikipedia/en/thumb/6/67/Ivory_Coast_national_football_team_logo.svg/100px-Ivory_Coast_national_football_team_logo.svg.png",
-"Australia":"https://upload.wikimedia.org/wikipedia/en/thumb/f/f9/Australia_national_football_team_logo.svg/100px-Australia_national_football_team_logo.svg.png",
-"Qatar":"https://upload.wikimedia.org/wikipedia/en/thumb/b/b4/Qatar_national_football_team_logo.svg/100px-Qatar_national_football_team_logo.svg.png",
-"Suiza":"https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Switzerland_national_football_team_logo.svg/100px-Switzerland_national_football_team_logo.svg.png",
-"Polonia":"https://upload.wikimedia.org/wikipedia/en/thumb/1/1e/Poland_national_football_team_logo.svg/100px-Poland_national_football_team_logo.svg.png",
-"Jamaica":"https://upload.wikimedia.org/wikipedia/en/thumb/9/9c/Jamaica_national_football_team_logo.svg/100px-Jamaica_national_football_team_logo.svg.png",
-"Emiratos Arabes":"https://upload.wikimedia.org/wikipedia/en/thumb/3/3d/United_Arab_Emirates_national_football_team_logo.svg/100px-United_Arab_Emirates_national_football_team_logo.svg.png",
-"Dinamarca":"https://upload.wikimedia.org/wikipedia/en/thumb/4/4e/Denmark_national_football_team_logo.svg/100px-Denmark_national_football_team_logo.svg.png",
-"Serbia":"https://upload.wikimedia.org/wikipedia/en/thumb/f/f0/Serbia_national_football_team_logo.svg/100px-Serbia_national_football_team_logo.svg.png",
-"Panama":"https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Panama_national_football_team_logo.svg/100px-Panama_national_football_team_logo.svg.png",
-"Irak":"https://upload.wikimedia.org/wikipedia/en/thumb/6/68/Iraq_national_football_team_logo.svg/100px-Iraq_national_football_team_logo.svg.png",
-"Austria":"https://upload.wikimedia.org/wikipedia/en/thumb/b/b6/Austria_national_football_team_logo.svg/100px-Austria_national_football_team_logo.svg.png",
-"Turquia":"https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Turkey_national_football_team_logo.svg/100px-Turkey_national_football_team_logo.svg.png",
-"Noruega":"https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Norway_national_football_team_logo.svg/100px-Norway_national_football_team_logo.svg.png"
-};
-function getCrest(name) {
-    var url = CRESTS[name] || "";
-    var fallback = '<span class="tBdg" style="background:var(--brd2)">'+esc(AB[name]||name.substring(0,3).toUpperCase())+'</span>';
-    if(!url) return fallback;
-    return '<img src="'+url+'" alt="'+esc(name)+'" class="team-crest" onerror="this.outerHTML=\''+fallback.replace(/'/g,"\\'")+'\'">';
-}
 
 function emptyRes() { return { g: {}, ko: { r32: Array(16).fill(null).map(()=>({h:null,a:null,w:null})), r16: Array(8).fill(null).map(()=>({h:null,a:null,w:null})), qf: Array(4).fill(null).map(()=>({h:null,a:null,w:null})), sf: Array(2).fill(null).map(()=>({h:null,a:null,w:null})) }, f: null, t: null }; }
 function eR() { var r = sG("wc26_results", null); if (!r) { r = emptyRes(); sS("wc26_results", r); } return r; }
@@ -214,7 +158,7 @@ function setResKOWinner(ph,idx,team) { var r=eR(); r.ko[ph][idx].w=team; sR(r); 
 function setResFinal(key,val) { var r=eR(); r[key]=val; sR(r); render(); }
 function clearResPhase(ph) { var r=eR(); if(ph==="g") r.g={}; else if(ph==="f") { r.f=null; r.t=null; } else r.ko[ph]=Array(KO_CONFIG[ph]).fill(null).map(()=>({h:null,a:null,w:null})); sR(r); toast("Fase limpiada","tS"); render(); }
 
-function teamOpts(sel) { var h='<option value="">-- Seleccionar --</option>'; ALL_TEAMS.forEach(t=>{h+='<option value="'+esc(t)+'"'+(sel===t?' selected':'')+'>'+esc(AB[t])+'</option>';}); return h; }
+function teamOpts(sel) { var h='<option value="">-- Seleccionar --</option>'; ALL_TEAMS.forEach(t=>{h+='<option value="'+esc(t)+'"'+(sel===t?' selected':'')+'>'+esc(FL[t]||"")+' '+esc(AB[t])+'</option>';}); return h; }
 
 function initCanvas() { var cv=document.getElementById("hCanvas"); if(!cv) return; var ctx=cv.getContext("2d"),w,h,pts=[]; function rs(){w=cv.width=cv.parentElement.offsetWidth;h=cv.height=cv.parentElement.offsetHeight;} rs(); window.addEventListener("resize",rs); for(var i=0;i<50;i++) pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+0.5,dx:(Math.random()-0.5)*0.35,dy:(Math.random()-0.5)*0.25,a:Math.random()*0.3+0.1}); function dr(){ctx.clearRect(0,0,w,h); for(var i=0;i<pts.length;i++){var p=pts[i];p.x+=p.dx;p.y+=p.dy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="rgba(34,197,94,"+p.a+")";ctx.fill();} for(var i=0;i<pts.length;i++) for(var j=i+1;j<pts.length;j++){var dx=pts[i].x-pts[j].x,dy=pts[i].y-pts[j].y,dist=Math.sqrt(dx*dx+dy*dy); if(dist<110){ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);ctx.strokeStyle="rgba(34,197,94,"+(0.04*(1-dist/110))+")";ctx.stroke();}} cRAF=requestAnimationFrame(dr);} dr(); }
 function stopCanvas() { if(cRAF){cancelAnimationFrame(cRAF);cRAF=null;} }
@@ -232,7 +176,7 @@ function render() {
     app.innerHTML = renderUser(); bindUser();
   } catch(err) {
     console.error("Error al cargar la vista:", err);
-    app.innerHTML = '<div style="padding:60px 20px;text-align:center;color:var(--dng)"><i class="fa-solid fa-triangle-exclamation" style="font-size:48px;margin-bottom:20px;display:block"></i><h2 class="font-display" style="font-weight:800;margin-bottom:10px">Error al cargar la pantalla</h2><p style="margin-bottom:20px;color:var(--txt2)">Quedaron datos corruptos de una versión anterior.</p><button class="bP" style="width:auto;display:inline-block;padding:12px 32px" onclick="cAD()"><i class="fa-solid fa-trash-can" style="margin-right:6px"></i>Limpiar Datos y Reiniciar</button></div>';
+    app.innerHTML = '<div style="padding:60px 20px;text-align:center;color:var(--dng)"><i class="fa-solid fa-triangle-exclamation" style="font-size:48px;margin-bottom:20px;display:block"></i><h2 class="font-display" style="font-weight:800;margin-bottom:10px">Error al cargar</h2><p style="margin-bottom:20px;color:var(--txt2)">Quedaron datos corruptos.</p><button class="bP" style="width:auto;display:inline-block;padding:12px 32px" onclick="cAD()"><i class="fa-solid fa-trash-can" style="margin-right:6px"></i>Limpiar Datos</button></div>';
   }
 }
 
@@ -274,13 +218,12 @@ function renderGroups(pd) {
     h+='<div class="gc"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:17px;color:var(--acc)">Grupo '+GR[gi].n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
     h+='<div class="sH"><span></span><span>Equipo</span><span style="text-align:center">PJ</span><span style="text-align:center">G</span><span style="text-align:center">E</span><span style="text-align:center">P</span><span style="text-align:center">Pts</span></div>';
     for(var ti=0;ti<4;ti++) {
-      var t=st2[ti],clr=ti<2?"var(--acc)":ti===2?"#bbf7d0":"var(--mut)";
-      var w=t.pts>=3?Math.floor(t.pts/3):0,d2=t.pts-w*3,l=3-w-d2;
-      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px">'+getCrest(t.name)+'<span style="font-size:13px;font-weight:500">'+esc(AB[t.name])+'</span></span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
+      var t=st2[ti],clr=ti<2?"var(--acc)":ti===2?"#bbf7d0":"var(--mut)"; var w=t.pts>=3?Math.floor(t.pts/3):0,d2=t.pts-w*3,l=3-w-d2;
+      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px"><span style="font-size:14px">'+esc(FL[t.name]||"")+'</span><span class="tBdg" style="background:'+TC[t.name]+'">'+esc(AB[t.name])+'</span></span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
     }
     for(var mi=0;mi<6;mi++) {
       var m=MSI[mi],key=gi+"_"+mi,sel=pd.g[key]||"",dis=locked?' disabled':'';
-      h+='<div class="mR"><div class="mT"><span style="display:flex;align-items:center;gap:4px">'+getCrest(GR[gi].t[m[0]])+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span class="mV">VS</span><span style="display:flex;align-items:center;gap:4px">'+getCrest(GR[gi].t[m[1]])+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt gb'+(sel==="1"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="1">1</button><button class="rBt gb'+(sel==="X"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="X">X</button><button class="rBt gb'+(sel==="2"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="2">2</button></div></div>';
+      h+='<div class="mR"><div class="mT"><span>'+esc(FL[GR[gi].t[m[0]]]||"")+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span class="mV">VS</span><span>'+esc(FL[GR[gi].t[m[1]]]||"")+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt gb'+(sel==="1"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="1">1</button><button class="rBt gb'+(sel==="X"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="X">X</button><button class="rBt gb'+(sel==="2"?" on":"")+'"'+dis+' data-gk="'+key+'" data-gv="2">2</button></div></div>';
     }
     h+='</div>';
   }
@@ -296,9 +239,9 @@ function renderKOUser(pd, ph, count) {
     if(!m.h || !m.a) { h+='<div class="km dis-match"><div class="kM">Partido '+(i+1)+'</div><div style="padding:20px 0;text-align:center;color:var(--mut)"><i class="fa-solid fa-clock" style="display:block;font-size:24px;margin-bottom:8px"></i><span style="font-size:13px">Equipos por definir</span></div></div>'; }
     else {
       h+='<div class="km"><div class="kM">Partido '+(i+1)+(m.w?' <span style="color:var(--acc)">(Finalizado)</span>':'')+'</div>';
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px;margin-bottom:8px"><span style="font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px">'+getCrest(m.h)+' '+esc(m.h)+'</span><button class="wB koWin'+(selTeam===m.h?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.h)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div>';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px;margin-bottom:8px"><span style="font-size:14px;font-weight:500">'+esc(FL[m.h]||"")+' '+esc(m.h)+'</span><button class="wB koWin'+(selTeam===m.h?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.h)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div>';
       h+='<div style="text-align:center;color:var(--acc);font-size:10px;font-weight:700;margin-bottom:8px">VS</div>';
-      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px"><span style="font-size:14px;font-weight:500;display:flex;align-items:center;gap:8px">'+getCrest(m.a)+' '+esc(m.a)+'</span><button class="wB koWin'+(selTeam===m.a?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.a)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div></div>';
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px;background:var(--bg2);border-radius:6px"><span style="font-size:14px;font-weight:500">'+esc(FL[m.a]||"")+' '+esc(m.a)+'</span><button class="wB koWin'+(selTeam===m.a?" on":"")+'"'+dis+' data-ki="'+ph+'|'+i+'" data-kt="'+esc(m.a)+'"><i class="fa-solid fa-trophy" style="font-size:10px"></i> Gana</button></div></div>';
     }
   }
   return h+'</div>';
@@ -317,8 +260,8 @@ function renderSummary(pd) {
   if(rk) { h+='<div class="fR" style="margin-bottom:24px"><div style="display:flex;align-items:center;gap:20px"><div style="text-align:center"><div style="font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Tu posicion</div><div class="font-display" style="font-weight:900;font-size:42px;color:var(--acc);line-height:1">#'+rk+'</div><div style="font-size:12px;color:var(--txt2);margin-top:4px">de '+Object.keys(gU()).length+' participantes</div></div>'; }
   if(hR()) { var sc=calcScore(pd,eR()); h+='<div style="text-align:center"><div style="font-size:11px;color:var(--acc);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Puntos</div><div class="font-display" style="font-weight:900;font-size:42px;color:var(--acc);line-height:1">'+sc.total+'</div></div></div></div>'; h+='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:24px">'; h+=sumCard("Grupos",sc.g+"/72","var(--acc)"); h+=sumCard("Octavos",sc.r32+"/16","var(--acc)"); h+=sumCard("Cuartos",sc.r16+"/8","var(--acc)"); h+=sumCard("Semifinal",sc.qf+"/4","var(--acc)"); h+=sumCard("Final",sc.sf+"/2","var(--acc)"); h+=sumCard("Campeon",sc.f+"/1","#bbf7d0"); h+='</div>'; } else { h+='</div></div>'; }
   h+='<div style="padding:16px;border-radius:10px;background:var(--card);border:1px solid var(--brd);margin-bottom:16px"><div style="font-size:13px;font-weight:600;margin-bottom:8px">Progreso</div><div class="pBar" style="height:8px;margin-bottom:8px"><div class="pF" style="width:'+Math.round(pr/TOTAL*100)+'%"></div></div><div style="font-size:12px;color:var(--txt2)">'+pr+' de '+TOTAL+' predicciones ('+Math.round(pr/TOTAL*100)+'%)</div></div>';
-  if(pd.f) h+='<div class="iB"><i class="fa-solid fa-trophy"></i> Campeon: <strong style="display:inline-flex;align-items:center;gap:6px">'+getCrest(pd.f)+' '+esc(pd.f)+'</strong></div>';
-  if(pd.t) h+='<div class="tBan" style="margin-top:8px"><i class="fa-solid fa-medal"></i> Tercer lugar: <strong style="display:inline-flex;align-items:center;gap:6px">'+getCrest(pd.t)+' '+esc(pd.t)+'</strong></div>';
+  if(pd.f) h+='<div class="iB"><i class="fa-solid fa-trophy"></i> Campeon: <strong>'+esc(FL[pd.f]||"")+' '+esc(pd.f)+'</strong></div>';
+  if(pd.t) h+='<div class="tBan" style="margin-top:8px"><i class="fa-solid fa-medal"></i> Tercer lugar: <strong>'+esc(FL[pd.t]||"")+' '+esc(pd.t)+'</strong></div>';
   return h;
 }
 function sumCard(l,v,c) { return '<div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">'+esc(l)+'</div><div class="font-display" style="font-weight:900;font-size:20px;color:'+c+'">'+esc(v)+'</div></div>'; }
@@ -374,7 +317,7 @@ function renderResGroups() {
     h+='<div class="kmC"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:16px;color:var(--acc)">Grupo '+GR[gi].n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
     for(var mi=0;mi<6;mi++) {
       var m=MSI[mi],key=gi+"_"+mi,sel=res.g[key]||"";
-      h+='<div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:4px"><div style="display:flex;align-items:center;gap:5px;font-size:12px"><span style="display:flex;align-items:center;gap:4px">'+getCrest(GR[gi].t[m[0]])+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span style="color:var(--mut);font-size:10px">VS</span><span style="display:flex;align-items:center;gap:4px">'+getCrest(GR[gi].t[m[1]])+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt rbRes'+(sel==="1"?" on":"")+'" data-rk="'+key+'" data-rv="1">1</button><button class="rBt rbRes'+(sel==="X"?" on":"")+'" data-rk="'+key+'" data-rv="X">X</button><button class="rBt rbRes'+(sel==="2"?" on":"")+'" data-rk="'+key+'" data-rv="2">2</button></div></div>';
+      h+='<div style="display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin-bottom:4px"><div style="display:flex;align-items:center;gap:5px;font-size:12px"><span>'+esc(FL[GR[gi].t[m[0]]]||"")+' '+esc(AB[GR[gi].t[m[0]]])+'</span><span style="color:var(--mut);font-size:10px">VS</span><span>'+esc(FL[GR[gi].t[m[1]]]||"")+' '+esc(AB[GR[gi].t[m[1]]])+'</span></div><div class="rB"><button class="rBt rbRes'+(sel==="1"?" on":"")+'" data-rk="'+key+'" data-rv="1">1</button><button class="rBt rbRes'+(sel==="X"?" on":"")+'" data-rk="'+key+'" data-rv="X">X</button><button class="rBt rbRes'+(sel==="2"?" on":"")+'" data-rk="'+key+'" data-rv="2">2</button></div></div>';
     }
     h+='</div>';
   }
@@ -415,8 +358,8 @@ function renderAdminView() {
   var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+TOTAL+'</div></div></div>';
   if(hR()){var sc=calcScore(pd,eR()),rk2=getRanking()[adminViewUser]; h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:24px"><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">POSICION</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">#'+(rk2||"--")+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">PUNTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--acc)">'+sc.total+'</div></div><div style="padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd);text-align:center"><div style="font-size:10px;color:var(--mut);margin-bottom:4px">ACIERTOS</div><div class="font-display" style="font-weight:900;font-size:24px;color:var(--txt)">'+(sc.g+sc.r32+sc.r16+sc.qf+sc.sf+sc.f+sc.t)+'</div></div></div>';}
   h+='<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Predicciones de Eliminatoria</h3><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px">';
-  ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length,total=KO_CONFIG[ph]; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+total+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0;display:flex;align-items:center;gap:4px"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px"></i>'+getCrest(pd[ph][k])+' '+esc(pd[ph][k]||"?")+'</div>'; h+='</div>';});
-  if(pd.f) h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;margin-top:4px">'+getCrest(pd.f)+' '+esc(pd.f)+'</div></div>';
+  ["r32","r16","qf","sf"].forEach(ph=>{var cnt=Object.keys(pd[ph]).length,total=KO_CONFIG[ph]; h+='<div style="padding:10px;border-radius:8px;background:var(--card);border:1px solid var(--brd)"><div style="font-weight:700;font-size:12px;color:var(--acc)">'+esc(RN[ph])+'</div><div style="font-size:11px;color:var(--mut)">'+cnt+'/'+total+'</div>'; for(var k in pd[ph]) h+='<div style="font-size:11px;padding:1px 0"><i class="fa-solid fa-trophy" style="color:var(--acc);font-size:8px;margin-right:3px"></i>'+esc(FL[pd[ph][k]]||"")+' '+esc(pd[ph][k]||"?")+'</div>'; h+='</div>';});
+  if(pd.f) h+='<div style="padding:10px;border-radius:8px;background:var(--aG);border:1px solid var(--acc)"><div style="font-weight:700;font-size:12px;color:var(--acc)"><i class="fa-solid fa-trophy" style="margin-right:3px"></i>Campeon</div><div style="font-size:13px;font-weight:600;margin-top:4px">'+esc(FL[pd.f]||"")+' '+esc(pd.f)+'</div></div>';
   return h+'</div>';
 }
 
