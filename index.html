@@ -36,11 +36,8 @@
 .pF{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:2px;transition:width .4s}
 .gc{background:var(--card);border:1px solid var(--brd);border-radius:11px;overflow:hidden;transition:.2s}.gc:hover{border-color:var(--brd2)}
 .gHd{padding:10px 14px;background:linear-gradient(135deg,rgba(34,197,94,.08),transparent);border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between}
-
-/* SOLUCIÓN: Se forzó el Grid en los encabezados para que calce exactamente con las filas */
 .sR{display:grid;grid-template-columns:20px 1fr 28px 28px 28px 32px 32px;gap:1px;padding:4px 14px;font-size:11px;align-items:center}
 .sH{color:var(--mut);font-size:9px;text-transform:uppercase;letter-spacing:.5px;padding:5px 14px 2px;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:20px 1fr 28px 28px 28px 32px 32px;gap:1px;align-items:center}
-
 .mR{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;border-top:1px solid rgba(26,58,26,.5);font-size:12px;gap:4px}
 .mT{display:flex;align-items:center;gap:6px;flex:1;min-width:0}.mT span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mV{color:var(--acc);font-size:9px;flex-shrink:0;font-weight:700}
@@ -117,23 +114,25 @@ function getCfg() { return sG("wc26_cfg", DEF_CONFIG); }
 function setCfg(c) { sS("wc26_cfg", c); }
 function getAllTeams() { var c = getCfg(), arr = []; c.forEach(g => g.t.forEach(t => arr.push(t))); return arr; }
 
-function handleImgErr(img, name, abbr, size) {
+function handleImgErr(img, abbr, size) {
+   // Si la imagen falla, inyectar SOLO la abreviatura para no romper el espacio
    var span = document.createElement('span');
-   span.style.cssText = 'display:flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500;min-width:0;overflow:hidden';
-   span.innerHTML = '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+name+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+abbr+'</span>';
-   img.parentElement.replaceWith(span);
+   span.style.cssText = 'font-size:'+size+';font-weight:500';
+   span.textContent = abbr;
+   img.replaceWith(span);
 }
 
-/* SOLUCIÓN: Se ajustó el contenedor Flex para evitar que la abreviatura se corte o desaparezca en pantallas pequeñas */
+/* SOLUCIÓN DEFINITIVA: Optimizado para que la abreviatura SIEMPRE sea visible y nunca se desborde */
 function tHtml(t, size) {
   size = size || '14px';
   var w = size==='14px' ? '26' : '22';
-  var baseStyle = 'display:flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500;min-width:0;overflow:hidden';
   
   if(t.i) {
-    return '<span style="'+baseStyle+'"><img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px;flex-shrink:0" onerror="handleImgErr(this, \''+esc(t.n).replace(/'/g, "\\'")+'\', \''+esc(t.a).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="flex-shrink:0">'+esc(t.a)+'</span></span>';
+    // Si hay imagen: Muestra Imagen + Abreviatura
+    return '<img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px;flex-shrink:0" onerror="handleImgErr(this, \''+esc(t.a).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="font-size:'+size+';font-weight:500;flex-shrink:0">'+esc(t.a)+'</span>';
   } else {
-    return '<span style="'+baseStyle+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(t.n)+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+esc(t.a)+'</span></span>';
+    // Si no hay imagen: Muestra Nombre (con recorte si es muy largo) + Abreviatura (que NUNCA desaparece)
+    return '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0">'+esc(t.n)+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+esc(t.a)+'</span>';
   }
 }
 
@@ -150,14 +149,7 @@ function gA() { var a = sG("wc26_admins", null); if (!a || typeof a !== "object"
 function sAA(a) { sS("wc26_admins", a); }
 function gAN(e) { var a = gA(); return (a && a[e] && a[e].n) ? a[e].n : e.split("@")[0]; }
 
-function dR(e,p,n,a,cp) { 
-    if(!e||!p||!n||!a) return toast("Completa todos","tE"); 
-    if(!validMail(e)) return toast("Correo invalido","tE"); 
-    if(p.length<6) return toast("Min 6 caracteres","tE"); 
-    if(p!==cp) return toast("Contrasenas no coinciden","tE"); 
-    var u=gU(); if(u[e]) return toast("Ya registrado","tE"); 
-    u[e]={p:btoa(p),n:n,a:a}; sUU(u); user=e; sessionStorage.setItem("wc26_s",e); toast("Cuenta creada","tS"); render(); 
-}
+function dR(e,p,n,a,cp) { if(!e||!p||!n||!a) return toast("Completa todos","tE"); if(!validMail(e)) return toast("Correo invalido","tE"); if(p.length<6) return toast("Min 6 caracteres","tE"); if(p!==cp) return toast("Contrasenas no coinciden","tE"); var u=gU(); if(u[e]) return toast("Ya registrado","tE"); u[e]={p:btoa(p),n:n,a:a}; sUU(u); user=e; sessionStorage.setItem("wc26_s",e); toast("Cuenta creada","tS"); render(); }
 function dL(e,p) { if(!e||!p) return toast("Completa campos","tE"); var u=gU(); if(!u[e]||u[e].p!==btoa(p)) return toast("Datos incorrectos","tE"); user=e; sessionStorage.setItem("wc26_s",e); toast("Bienvenido","tS"); render(); }
 function dA(e,p) { var a=gA(); if(!a[e]||a[e].p!==btoa(p)) return toast("Credenciales incorrectas","tE"); isAdmin=true; user=e; sessionStorage.setItem("wc26_a",e); toast("Admin iniciado","tS"); render(); }
 function dO() { user=null; sessionStorage.removeItem("wc26_s"); render(); }
@@ -250,12 +242,12 @@ function renderGroups(pd) {
     var g=cfg[gi], st2=calcStandings(gi,pd),done=0; for(var mi=0;mi<6;mi++) if(pd.g[gi+"_"+mi]) done++;
     h+='<div class="gc"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:17px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
     
-    // Encabezados alineados
     h+='<div class="sH"><span></span><span>Equipo</span><span style="text-align:center">PJ</span><span style="text-align:center">G</span><span style="text-align:center">E</span><span style="text-align:center">P</span><span style="text-align:center">Pts</span></div>';
     
     for(var ti=0;ti<4;ti++) {
       var t=st2[ti],clr=ti<2?"var(--acc)":ti===2?"#bbf7d0":"var(--mut)"; var w=t.pts>=3?Math.floor(t.pts/3):0,d2=t.pts-w*3,l=3-w-d2;
-      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px">'+tHtml(t)+'</span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
+      // SOLUCIÓN: Se agregaron min-width:0 y overflow:hidden al contenedor span para evitar que empuje el resto de la tabla
+      h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px;min-width:0;overflow:hidden">'+tHtml(t)+'</span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
     }
     for(var mi=0;mi<6;mi++) {
       var m=MSI[mi],key=gi+"_"+mi,sel=pd.g[key]||"",dis=locked?' disabled':'';
