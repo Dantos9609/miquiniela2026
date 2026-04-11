@@ -36,8 +36,11 @@
 .pF{height:100%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:2px;transition:width .4s}
 .gc{background:var(--card);border:1px solid var(--brd);border-radius:11px;overflow:hidden;transition:.2s}.gc:hover{border-color:var(--brd2)}
 .gHd{padding:10px 14px;background:linear-gradient(135deg,rgba(34,197,94,.08),transparent);border-bottom:1px solid var(--brd);display:flex;align-items:center;justify-content:space-between}
+
+/* SOLUCIÓN: Se forzó el Grid en los encabezados para que calce exactamente con las filas */
 .sR{display:grid;grid-template-columns:20px 1fr 28px 28px 28px 32px 32px;gap:1px;padding:4px 14px;font-size:11px;align-items:center}
-.sH{color:var(--mut);font-size:9px;text-transform:uppercase;letter-spacing:.5px;padding:5px 14px 2px;border-bottom:1px solid var(--brd)}
+.sH{color:var(--mut);font-size:9px;text-transform:uppercase;letter-spacing:.5px;padding:5px 14px 2px;border-bottom:1px solid var(--brd);display:grid;grid-template-columns:20px 1fr 28px 28px 28px 32px 32px;gap:1px;align-items:center}
+
 .mR{display:flex;align-items:center;justify-content:space-between;padding:6px 14px;border-top:1px solid rgba(26,58,26,.5);font-size:12px;gap:4px}
 .mT{display:flex;align-items:center;gap:6px;flex:1;min-width:0}.mT span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mV{color:var(--acc);font-size:9px;flex-shrink:0;font-weight:700}
@@ -74,7 +77,7 @@
 .dis-match{opacity: 0.5; pointer-events: none;}
 .team-crest{width:26px;height:26px;object-fit:contain;border-radius:3px;flex-shrink:0;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))}
 *:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
-@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}.team-crest{width:22px;height:22px}}
+@media(max-width:768px){.sb{transform:translateX(-100%)}.sb.mo{transform:translateX(0)}.mc{margin-left:0}.tB{padding:10px 14px}.sR{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;font-size:10px;padding:3px 8px}.sH{grid-template-columns:18px 1fr 24px 24px 24px 28px 28px;padding:3px 8px 2px}.mR{padding:4px 8px;font-size:11px}.rBt{width:24px;height:21px;font-size:9px}.ab{margin:0 14px;padding:24px 18px}.tBdg{width:24px;height:20px;font-size:7.5px}.team-crest{width:22px;height:22px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -91,13 +94,7 @@ function sS(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e
 function esc(s) { if (!s) return ""; var d = document.createElement("div"); d.textContent = s; return d.innerHTML; }
 function toast(msg, cls) { var d = document.createElement("div"); d.className = "toast " + (cls || "tI"); d.textContent = msg; document.getElementById("toasts").appendChild(d); setTimeout(function () { if (d.parentNode) d.remove(); }, 3200); }
 
-// SOLUCIÓN: Función de validación de correo amigable y 100% compatible
-function validMail(e) { 
-    if(!e) return false; 
-    var at = e.indexOf('@'); 
-    var dot = e.lastIndexOf('.'); 
-    return at > 0 && dot > at + 1; 
-}
+function validMail(e) { if(!e) return false; var at = e.indexOf('@'); var dot = e.lastIndexOf('.'); return at > 0 && dot > at + 1; }
 
 var DEF_CONFIG = [
   { n: "A", t: [{n:"Estados Unidos",a:"USA",i:""},{n:"Francia",a:"FRA",i:""},{n:"Senegal",a:"SEN",i:""},{n:"Nueva Zelanda",a:"NZL",i:""}] },
@@ -122,18 +119,21 @@ function getAllTeams() { var c = getCfg(), arr = []; c.forEach(g => g.t.forEach(
 
 function handleImgErr(img, name, abbr, size) {
    var span = document.createElement('span');
-   span.style.cssText = 'display:inline-flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500';
-   span.innerHTML = name + ' <span class="tBdg" style="background:var(--brd2)">'+abbr+'</span>';
+   span.style.cssText = 'display:flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500;min-width:0;overflow:hidden';
+   span.innerHTML = '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+name+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+abbr+'</span>';
    img.parentElement.replaceWith(span);
 }
 
+/* SOLUCIÓN: Se ajustó el contenedor Flex para evitar que la abreviatura se corte o desaparezca en pantallas pequeñas */
 function tHtml(t, size) {
   size = size || '14px';
   var w = size==='14px' ? '26' : '22';
+  var baseStyle = 'display:flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500;min-width:0;overflow:hidden';
+  
   if(t.i) {
-    return '<span style="display:inline-flex;align-items:center;gap:6px"><img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px" onerror="handleImgErr(this, \''+esc(t.n).replace(/'/g, "\\'")+'\', \''+esc(t.a).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="font-size:'+size+';font-weight:500">'+esc(t.a)+'</span></span>';
+    return '<span style="'+baseStyle+'"><img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px;flex-shrink:0" onerror="handleImgErr(this, \''+esc(t.n).replace(/'/g, "\\'")+'\', \''+esc(t.a).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="flex-shrink:0">'+esc(t.a)+'</span></span>';
   } else {
-    return '<span style="display:inline-flex;align-items:center;gap:6px;font-size:'+size+';font-weight:500">'+esc(t.n)+' <span class="tBdg" style="background:var(--brd2)">'+esc(t.a)+'</span></span>';
+    return '<span style="'+baseStyle+'"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(t.n)+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+esc(t.a)+'</span></span>';
   }
 }
 
@@ -150,7 +150,6 @@ function gA() { var a = sG("wc26_admins", null); if (!a || typeof a !== "object"
 function sAA(a) { sS("wc26_admins", a); }
 function gAN(e) { var a = gA(); return (a && a[e] && a[e].n) ? a[e].n : e.split("@")[0]; }
 
-// SOLUCIÓN: Se aplicó la función validMail aquí
 function dR(e,p,n,a,cp) { 
     if(!e||!p||!n||!a) return toast("Completa todos","tE"); 
     if(!validMail(e)) return toast("Correo invalido","tE"); 
@@ -159,7 +158,6 @@ function dR(e,p,n,a,cp) {
     var u=gU(); if(u[e]) return toast("Ya registrado","tE"); 
     u[e]={p:btoa(p),n:n,a:a}; sUU(u); user=e; sessionStorage.setItem("wc26_s",e); toast("Cuenta creada","tS"); render(); 
 }
-
 function dL(e,p) { if(!e||!p) return toast("Completa campos","tE"); var u=gU(); if(!u[e]||u[e].p!==btoa(p)) return toast("Datos incorrectos","tE"); user=e; sessionStorage.setItem("wc26_s",e); toast("Bienvenido","tS"); render(); }
 function dA(e,p) { var a=gA(); if(!a[e]||a[e].p!==btoa(p)) return toast("Credenciales incorrectas","tE"); isAdmin=true; user=e; sessionStorage.setItem("wc26_a",e); toast("Admin iniciado","tS"); render(); }
 function dO() { user=null; sessionStorage.removeItem("wc26_s"); render(); }
@@ -251,7 +249,10 @@ function renderGroups(pd) {
   for(var gi=st;gi<en;gi++) {
     var g=cfg[gi], st2=calcStandings(gi,pd),done=0; for(var mi=0;mi<6;mi++) if(pd.g[gi+"_"+mi]) done++;
     h+='<div class="gc"><div class="gHd"><span class="font-display" style="font-weight:800;font-size:17px;color:var(--acc)">Grupo '+g.n+'</span><span style="font-size:11px;color:'+(done===6?"var(--acc)":"var(--mut)")+'">'+done+'/6</span></div>';
+    
+    // Encabezados alineados
     h+='<div class="sH"><span></span><span>Equipo</span><span style="text-align:center">PJ</span><span style="text-align:center">G</span><span style="text-align:center">E</span><span style="text-align:center">P</span><span style="text-align:center">Pts</span></div>';
+    
     for(var ti=0;ti<4;ti++) {
       var t=st2[ti],clr=ti<2?"var(--acc)":ti===2?"#bbf7d0":"var(--mut)"; var w=t.pts>=3?Math.floor(t.pts/3):0,d2=t.pts-w*3,l=3-w-d2;
       h+='<div class="sR"><span style="color:'+clr+';font-weight:700">'+(ti+1)+'</span><span style="display:flex;align-items:center;gap:6px">'+tHtml(t)+'</span><span style="text-align:center;color:var(--txt2)">3</span><span style="text-align:center;color:var(--txt2)">'+w+'</span><span style="text-align:center;color:var(--txt2)">'+d2+'</span><span style="text-align:center;color:var(--txt2)">'+l+'</span><span style="text-align:center;font-weight:700;color:'+clr+'">'+t.pts+'</span></div>';
@@ -429,62 +430,16 @@ function renderAdmScoring() {
 }
 
 function renderAdmAdmins() {
-  var admins = gA();
-  var keys = Object.keys(admins);
+  var admins = gA(); var keys = Object.keys(admins);
   var h = '<h2 class="font-display" style="font-weight:800;font-size:22px;margin-bottom:4px">Administrar Cuentas Admin</h2><p style="font-size:13px;color:var(--txt2);margin-bottom:20px">Agrega nuevos administradores con acceso completo al panel.</p>';
-  h += '<div class="kmC" style="margin-bottom:24px">';
-  h += '<div class="kM"><i class="fa-solid fa-user-plus" style="margin-right:4px"></i> Nuevo Administrador</div>';
-  h += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">';
-  h += '<div class="frmR"><label>Correo Electrónico</label><input class="fi" id="naE" type="email" placeholder="correo@ejemplo.com"></div>';
-  h += '<div class="frmR"><label>Contraseña (Min. 6)</label><input class="fi" id="naP" type="password" placeholder="********"></div>';
-  h += '<div class="frmR"><label>Nombre</label><input class="fi" id="naN" type="text" placeholder="Nombre"></div>';
-  h += '<div class="frmR"><label>Apellido</label><input class="fi" id="naA" type="text" placeholder="Apellido"></div>';
-  h += '</div>';
-  h += '<button class="bP" style="width:100%;margin-top:10px" onclick="addAdminAcc()"><i class="fa-solid fa-plus" style="margin-right:6px"></i>Registrar Admin</button>';
-  h += '</div>';
-  h += '<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Admins Actuales ('+keys.length+')</h3>';
-  h += '<div style="display:grid;gap:8px">';
-  keys.forEach(k => {
-    var adm = admins[k];
-    var isMe = (k === user);
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd)">';
-    h += '<div style="display:flex;align-items:center;gap:12px">';
-    h += '<div style="width:36px;height:36px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;color:var(--acc)"><i class="fa-solid fa-user-shield"></i></div>';
-    h += '<div><div style="font-weight:600;font-size:14px">'+esc(adm.n)+' '+(esc(adm.a)||'')+(isMe?' <span style="font-size:10px;color:var(--acc);font-weight:700">(Tú)</span>':'')+'</div><div style="font-size:11px;color:var(--mut)">'+esc(k)+'</div></div>';
-    h += '</div>';
-    if(!isMe) {
-      h += '<button class="bS dng" onclick="delAdminAcc(\''+esc(k).replace(/'/g,"\\'")+'\')"><i class="fa-solid fa-trash-can" style="margin-right:4px"></i>Eliminar</button>';
-    }
-    h += '</div>';
-  });
-  h += '</div>';
-  return h;
+  h += '<div class="kmC" style="margin-bottom:24px"><div class="kM"><i class="fa-solid fa-user-plus" style="margin-right:4px"></i> Nuevo Administrador</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><div class="frmR"><label>Correo Electrónico</label><input class="fi" id="naE" type="email" placeholder="correo@ejemplo.com"></div><div class="frmR"><label>Contraseña (Min. 6)</label><input class="fi" id="naP" type="password" placeholder="********"></div><div class="frmR"><label>Nombre</label><input class="fi" id="naN" type="text" placeholder="Nombre"></div><div class="frmR"><label>Apellido</label><input class="fi" id="naA" type="text" placeholder="Apellido"></div></div><button class="bP" style="width:100%;margin-top:10px" onclick="addAdminAcc()"><i class="fa-solid fa-plus" style="margin-right:6px"></i>Registrar Admin</button></div>';
+  h += '<h3 class="font-display" style="font-weight:700;font-size:16px;margin-bottom:12px">Admins Actuales ('+keys.length+')</h3><div style="display:grid;gap:8px">';
+  keys.forEach(k => { var adm = admins[k]; var isMe = (k === user); h += '<div style="display:flex;align-items:center;justify-content:space-between;padding:14px;border-radius:10px;background:var(--card);border:1px solid var(--brd)"><div style="display:flex;align-items:center;gap:12px"><div style="width:36px;height:36px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;color:var(--acc)"><i class="fa-solid fa-user-shield"></i></div><div><div style="font-weight:600;font-size:14px">'+esc(adm.n)+' '+(esc(adm.a)||'')+(isMe?' <span style="font-size:10px;color:var(--acc);font-weight:700">(Tú)</span>':'')+'</div><div style="font-size:11px;color:var(--mut)">'+esc(k)+'</div></div></div>'+( !isMe ? '<button class="bS dng" onclick="delAdminAcc(\''+esc(k).replace(/'/g,"\\'")+'\')"><i class="fa-solid fa-trash-can" style="margin-right:4px"></i>Eliminar</button>' : '')+'</div>'; });
+  return h+'</div>';
 }
 
-// SOLUCIÓN: Se aplicó la función validMail aquí también
-function addAdminAcc() {
-  var e = document.getElementById("naE").value.trim();
-  var n = document.getElementById("naN").value.trim();
-  var a = document.getElementById("naA").value.trim();
-  var p = document.getElementById("naP").value;
-  if(!e || !p || !n) return toast("Correo, nombre y contraseña son obligatorios", "tE");
-  if(!validMail(e)) return toast("Correo inválido", "tE");
-  if(p.length < 6) return toast("La contraseña debe tener al menos 6 caracteres", "tE");
-  var admins = gA();
-  if(admins[e]) return toast("Este correo ya tiene cuenta de administrador", "tE");
-  admins[e] = { p: btoa(p), n: n, a: a };
-  sAA(admins);
-  toast("Admin agregado exitosamente", "tS");
-  render();
-}
-
-function delAdminAcc(e) {
-  var admins = gA();
-  delete admins[e];
-  sAA(admins);
-  toast("Cuenta de administrador eliminada", "tS");
-  render();
-}
+function addAdminAcc() { var e=document.getElementById("naE").value.trim(),n=document.getElementById("naN").value.trim(),a=document.getElementById("naA").value.trim(),p=document.getElementById("naP").value; if(!e||!p||!n) return toast("Correo, nombre y contraseña son obligatorios","tE"); if(!validMail(e)) return toast("Correo inválido","tE"); if(p.length<6) return toast("La contraseña debe tener al menos 6 caracteres","tE"); var admins=gA(); if(admins[e]) return toast("Este correo ya tiene cuenta de administrador","tE"); admins[e]={p:btoa(p),n:n,a:a}; sAA(admins); toast("Admin agregado exitosamente","tS"); render(); }
+function delAdminAcc(e) { var admins=gA(); delete admins[e]; sAA(admins); toast("Cuenta de administrador eliminada","tS"); render(); }
 
 function renderAdminView() {
   var pd=gUP(adminViewUser),pr=gPr(pd),h='<div style="margin-bottom:16px"><button class="bS out" onclick="adminViewUser=null;render()"><i class="fa-solid fa-arrow-left" style="margin-right:4px"></i> Volver</button></div><div style="display:flex;align-items:center;gap:12px;margin-bottom:20px"><div style="width:40px;height:40px;border-radius:50%;background:var(--aG);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--acc)"><i class="fa-solid fa-user"></i></div><div><div class="font-display" style="font-weight:700;font-size:18px">'+esc(gUN(adminViewUser))+'</div><div style="font-size:12px;color:var(--mut)">'+esc(adminViewUser)+' &mdash; '+pr+'/'+getTOTAL()+'</div></div></div>';
