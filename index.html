@@ -121,14 +121,25 @@ function handleImgErr(img, abbr, size) {
    img.replaceWith(span);
 }
 
+/* FUNCIÓN CORREGIDA: Ahora detecta si viene de la tabla de posiciones (name) o de los partidos (n) */
 function tHtml(t, size) {
+  if (!t) return '';
   size = size || '14px';
   var w = size==='14px' ? '26' : '22px';
   
+  // Obtiene el nombre y la abreviatura sin importar si es objeto de tabla o de partido
+  var name = t.n || t.name || 'Desconocido';
+  var abbr = t.a || '';
+
   if(t.i) {
-    return '<img src="'+esc(t.i)+'" alt="'+esc(t.n)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px;flex-shrink:0" onerror="handleImgErr(this, \''+esc(t.a).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="font-size:'+size+';font-weight:500;flex-shrink:0">'+esc(t.a)+'</span>';
+    return '<img src="'+esc(t.i)+'" alt="'+esc(name)+'" class="team-crest" style="width:'+w+'px;height:'+w+'px;flex-shrink:0" onerror="handleImgErr(this, \''+esc(abbr).replace(/'/g, "\\'")+'\', \''+size+'\')"><span style="font-size:'+size+';font-weight:500;flex-shrink:0">'+esc(abbr)+'</span>';
   } else {
-    return '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(t.n)+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+esc(t.a)+'</span>';
+    // Si tiene abreviatura, muestra nombre + badge; si no (como en la tabla), solo muestra el nombre
+    if(abbr) {
+        return '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(name)+'</span><span class="tBdg" style="background:var(--brd2);flex-shrink:0">'+esc(abbr)+'</span>';
+    } else {
+        return '<span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+esc(name)+'</span>';
+    }
   }
 }
 
